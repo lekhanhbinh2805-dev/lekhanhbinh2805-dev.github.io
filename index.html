@@ -75,7 +75,7 @@ button:hover { background:#00c6ff; }
 </div>
 
 <script>
-const URL_API = "https://script.google.com/macros/s/AKfycbyo-tDWHdS-7o6SGPdQ4Fvehp09lVDaCYK598tinlQTjYtoTSWdckgPkn2dQWIqkhfR/exec"; // <<< DÁN LINK VÀO ĐÂY
+const URL_API = "https://script.google.com/macros/s/AKfycbxbl2MqYVJ3JKwYLokJ5DIeD_VVsEi3aoDKPhcBqvCfVBk6ztXLW2eTTqyPHQ1ty4wSPA/exec"; // <<< DÁN LINK VÀO ĐÂY
 
 function gui() {
   const maMay = document.getElementById("maMay").value;
@@ -97,7 +97,7 @@ function gui() {
   msg.innerText = "Đang gửi...";
   msg.style.color = "blue";
 
-  fetch(URL_API, {
+fetch(URL_API, {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
@@ -107,18 +107,21 @@ function gui() {
     nhietDo: nhietDo
   })
 })
-  .then(res => res.json())
-  .then(() => {
-    msg.innerText = "✔ Lưu thành công";
-    msg.style.color = "green";
+.then(res => res.text()) // đổi sang text để debug
+.then(data => {
+  console.log("Server trả:", data);
 
-    document.getElementById("nhietDo").value = "";
-    document.getElementById("maMay").value = "";
-  })
-  .catch(() => {
-    msg.innerText = "❌ Lỗi gửi dữ liệu";
-    msg.style.color = "red";
-  });
+  msg.innerText = "✔ Lưu thành công";
+  msg.style.color = "green";
+
+  document.getElementById("nhietDo").value = "";
+  document.getElementById("maMay").value = "";
+})
+.catch(err => {
+  console.error(err);
+  msg.innerText = "❌ Lỗi gửi dữ liệu";
+  msg.style.color = "red";
+});
 }
 </script>
 
