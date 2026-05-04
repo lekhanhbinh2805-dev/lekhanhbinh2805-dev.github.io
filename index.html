@@ -1,83 +1,133 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Nhập nhiệt độ máy hàn</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhập nhiệt độ mũi hàn</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-<style>
-body {
-  font-family: Arial;
-  background: linear-gradient(135deg,#4facfe,#00f2fe);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
-.box {
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  width:300px;
-}
-input, select, button {
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-}
-button {
-  background:#4facfe;
-  color:white;
-  border:none;
-}
-</style>
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 320px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0 15px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #4facfe;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00c6ff;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
-
 <body>
-<div class="box">
-<h3>Nhập nhiệt độ</h3>
 
-<select id="maMay">
-  <option value="">--Chọn máy--</option>
-  <option>M1</option>
-  <option>M2</option>
-  <option>M3</option>
-</select>
+<div class="container">
+  <h2>Nhập nhiệt độ</h2>
 
-<input type="number" id="nhietDo" placeholder="Nhập nhiệt độ">
+  <label>Mã máy</label>
+  <select id="maMay">
+    <option value="">-- Chọn mã máy --</option>
+    <option value="MAY-01">MAY-01</option>
+    <option value="MAY-02">MAY-02</option>
+    <option value="MAY-03">MAY-03</option>
+  </select>
 
-<button onclick="gui()">Gửi</button>
+  <label>Nhiệt độ (°C)</label>
+  <input type="number" id="nhietDo" placeholder="Nhập nhiệt độ">
 
-<p id="msg"></p>
+  <button onclick="guiDuLieu()">Gửi dữ liệu</button>
+
+  <div class="message" id="msg"></div>
 </div>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbzBnd8Cgn95aHidz_SgAZO6kRqZEsAKySJhqY1mB-HmKzG-PkHY9xQGYAL2ZW_R7y_iQg/exec";
+const URL_API = "https://script.google.com/macros/s/AKfycbzBnd8Cgn95aHidz_SgAZO6kRqZEsAKySJhqY1mB-HmKzG-PkHY9xQGYAL2ZW_R7y_iQg/exec";
 
-function gui() {
+function guiDuLieu() {
   const maMay = document.getElementById("maMay").value;
   const nhietDo = document.getElementById("nhietDo").value;
+  const msg = document.getElementById("msg");
 
-  if(!maMay || !nhietDo){
-    document.getElementById("msg").innerText = "Nhập đủ dữ liệu!";
+  // Validation
+  if (!maMay) {
+    msg.innerText = "Vui lòng chọn mã máy";
+    msg.style.color = "red";
     return;
   }
 
-  fetch(API_URL, {
+  if (!nhietDo || nhietDo < 0 || nhietDo > 500) {
+    msg.innerText = "Nhiệt độ không hợp lệ (0-500°C)";
+    msg.style.color = "red";
+    return;
+  }
+
+  const data = {
+    maMay: maMay,
+    nhietDo: nhietDo
+  };
+
+  fetch(URL_API, {
     method: "POST",
-    body: JSON.stringify({
-      maMay: maMay,
-      nhietDo: nhietDo
-    })
+    body: JSON.stringify(data)
   })
   .then(res => res.json())
-  .then(data => {
-    document.getElementById("msg").innerText = "Đã gửi!";
+  .then(() => {
+    msg.innerText = "Lưu thành công";
+    msg.style.color = "green";
+
+    document.getElementById("nhietDo").value = "";
+    document.getElementById("maMay").value = "";
   })
-  .catch(err => {
-    document.getElementById("msg").innerText = "Lỗi gửi!";
+  .catch(() => {
+    msg.innerText = "Lỗi gửi dữ liệu";
+    msg.style.color = "red";
   });
 }
 </script>
 
 </body>
 </html>
+
