@@ -2,126 +2,80 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nhập nhiệt độ mũi hàn</title>
+<title>Nhập nhiệt độ máy hàn</title>
 
 <style>
 body {
   font-family: Arial;
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  background: linear-gradient(135deg,#4facfe,#00f2fe);
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
-  margin:0;
 }
-
-.container {
+.box {
   background:white;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  width:320px;
-}
-
-h2 { text-align:center; }
-
-input, select {
-  width:100%;
-  padding:10px;
-  margin:10px 0;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-
-button {
-  width:100%;
-  padding:12px;
-  border:none;
+  padding:20px;
   border-radius:10px;
+  width:300px;
+}
+input, select, button {
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+}
+button {
   background:#4facfe;
   color:white;
-  font-size:16px;
-  cursor:pointer;
-}
-
-button:hover { background:#00c6ff; }
-
-.message {
-  text-align:center;
-  margin-top:10px;
-  font-weight:bold;
+  border:none;
 }
 </style>
 </head>
 
 <body>
+<div class="box">
+<h3>Nhập nhiệt độ</h3>
 
-<div class="container">
-  <h2>Nhập nhiệt độ</h2>
+<select id="maMay">
+  <option value="">--Chọn máy--</option>
+  <option>M1</option>
+  <option>M2</option>
+  <option>M3</option>
+</select>
 
-  <select id="maMay">
-    <option value="">-- Chọn mã máy --</option>
-    <option>MAY-01</option>
-    <option>MAY-02</option>
-    <option>MAY-03</option>
-  </select>
+<input type="number" id="nhietDo" placeholder="Nhập nhiệt độ">
 
-  <input type="number" id="nhietDo" placeholder="Nhập nhiệt độ">
+<button onclick="gui()">Gửi</button>
 
-  <button onclick="gui()">Gửi dữ liệu</button>
-
-  <div id="msg" class="message"></div>
+<p id="msg"></p>
 </div>
 
 <script>
-const URL_API = "https://script.google.com/macros/s/AKfycbwTKa680R8huCIg90SsJw8ySNz7n4RSQyGI-ppq9bs9GEr-9vuxeMcvyWwMmTbL6QfE/exec"; // <<< DÁN LINK VÀO ĐÂY
+const API_URL = "https://script.google.com/macros/s/AKfycbzBnd8Cgn95aHidz_SgAZO6kRqZEsAKySJhqY1mB-HmKzG-PkHY9xQGYAL2ZW_R7y_iQg/exec";
 
 function gui() {
   const maMay = document.getElementById("maMay").value;
   const nhietDo = document.getElementById("nhietDo").value;
-  const msg = document.getElementById("msg");
 
-  if (!maMay) {
-    msg.innerText = "Chọn mã máy!";
-    msg.style.color = "red";
+  if(!maMay || !nhietDo){
+    document.getElementById("msg").innerText = "Nhập đủ dữ liệu!";
     return;
   }
 
-  if (!nhietDo || nhietDo < 0 || nhietDo > 500) {
-    msg.innerText = "0-500°C thôi!";
-    msg.style.color = "red";
-    return;
-  }
-
-  msg.innerText = "Đang gửi...";
-  msg.style.color = "blue";
-
-fetch(URL_API, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    maMay: maMay,
-    nhietDo: nhietDo
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      maMay: maMay,
+      nhietDo: nhietDo
+    })
   })
-})
-.then(res => res.text()) // đổi sang text để debug
-.then(data => {
-  console.log("Server trả:", data);
-
-  msg.innerText = "✔ Lưu thành công";
-  msg.style.color = "green";
-
-  document.getElementById("nhietDo").value = "";
-  document.getElementById("maMay").value = "";
-})
-.catch(err => {
-  console.error(err);
-  msg.innerText = "❌ Lỗi gửi dữ liệu";
-  msg.style.color = "red";
-});
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("msg").innerText = "Đã gửi!";
+  })
+  .catch(err => {
+    document.getElementById("msg").innerText = "Lỗi gửi!";
+  });
 }
 </script>
 
