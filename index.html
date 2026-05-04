@@ -98,10 +98,15 @@ function gui() {
   msg.style.color = "blue";
 
   fetch(URL_API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ maMay, nhietDo })
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    maMay: maMay,
+    nhietDo: nhietDo
   })
+})
   .then(res => res.json())
   .then(() => {
     msg.innerText = "✔ Lưu thành công";
