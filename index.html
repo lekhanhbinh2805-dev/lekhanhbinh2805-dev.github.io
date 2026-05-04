@@ -2,10 +2,132 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Website của tôi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhập nhiệt độ mũi hàn</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 320px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0 15px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #4facfe;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00c6ff;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1>Xin chào!</h1>
-  <p>Đây là website đầu tiên của tôi 🎉</p>
+
+<div class="container">
+  <h2>Nhập nhiệt độ</h2>
+
+  <label>Mã máy</label>
+  <select id="maMay">
+    <option value="">-- Chọn mã máy --</option>
+    <option value="MAY-01">MAY-01</option>
+    <option value="MAY-02">MAY-02</option>
+    <option value="MAY-03">MAY-03</option>
+  </select>
+
+  <label>Nhiệt độ (°C)</label>
+  <input type="number" id="nhietDo" placeholder="Nhập nhiệt độ">
+
+  <button onclick="guiDuLieu()">Gửi dữ liệu</button>
+
+  <div class="message" id="msg"></div>
+</div>
+
+<script>
+const URL_API = "DAN_URL_APPS_SCRIPT_O_DAY";
+
+function guiDuLieu() {
+  const maMay = document.getElementById("maMay").value;
+  const nhietDo = document.getElementById("nhietDo").value;
+  const msg = document.getElementById("msg");
+
+  // Validation
+  if (!maMay) {
+    msg.innerText = "Vui lòng chọn mã máy";
+    msg.style.color = "red";
+    return;
+  }
+
+  if (!nhietDo || nhietDo < 0 || nhietDo > 500) {
+    msg.innerText = "Nhiệt độ không hợp lệ (0-500°C)";
+    msg.style.color = "red";
+    return;
+  }
+
+  const data = {
+    maMay: maMay,
+    nhietDo: nhietDo
+  };
+
+  fetch(URL_API, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(() => {
+    msg.innerText = "Lưu thành công";
+    msg.style.color = "green";
+
+    document.getElementById("nhietDo").value = "";
+    document.getElementById("maMay").value = "";
+  })
+  .catch(() => {
+    msg.innerText = "Lỗi gửi dữ liệu";
+    msg.style.color = "red";
+  });
+}
+</script>
+
 </body>
 </html>
+
