@@ -1,5 +1,5 @@
 // Thay link này bằng URL Web App từ Google Apps Script của bạn
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKH2sCNC7AEZTNymUOFHt_irX5uHj-nQHaOJii5BTNLVbhdt7lT_mlVIUC3x1aPNlWCg/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxt8ZOfL-Eg2pKHkC7kDTyn1UlOfnQOHZLOZt5hHEqpg15WWhwTWtHd740_mf-ahJuwZw/exec';
 
 async function sendDataToGoogleSheet(data) {
     const response = await fetch(SCRIPT_URL, {
