@@ -1,5 +1,5 @@
 // Cấu hình URL Web App của bạn
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzLvs-PWmpbPNJ-8i23A57ZWYdZxFfUbiW_yJsGbWibqJExwDq-AkgdEdzqt-trQfGGNQ/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx2Ekx5zFkWNzvemRNrP_kJN_-0iuO9HVceQyeqBRB1hXFgd7JuKjAA4N2nSbYK74i7lA/exec';
 
 /**
  * Hàm gửi dữ liệu lên Google Sheets
