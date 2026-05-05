@@ -126,7 +126,7 @@
 <body>
 
 <div class="form-container">
-    <h2>KIỂM TRA NHIỆT ĐỘ MŨI HÀN</h2>
+    <h2>KIỂM TRA LỰC VÍT MÁY</h2>
     
     <form id="tempForm">
         <!-- Bộ phận -->
@@ -170,18 +170,30 @@
             </div>
         </div>
 
-        <!-- Nhiệt độ cài đặt -->
+        <!-- Vị trí công việc -->
         <div class="form-group">
-            <label>NHIỆT ĐỘ CÀI ĐẶT (°C)</label>
-            <input type="number" name="nhietDoCaiDat12" placeholder="0" required>
+            <label>VỊ TRÍ CÔNG VIỆC</label>
+            <input type="text" name="viTriCV" required>
         </div>
 
-        <!-- Nhiệt độ thực tế -->
+        <!-- Lực vít theo HDCV -->
         <div class="form-group">
-            <label>NHIỆT ĐỘ THỰC TẾ (°C)</label>
-            <input type="number" name="nhietDoThucTe12" placeholder="0" required>
+            <label>LỰC VÍT THEO HDCV (kgf.cm)</label>
+            <input type="text" name="lucVitYC" placeholder="Khoảng lực yêu cầu trong HDCV (VD: 8-10)" required>
         </div>
 
+        <!-- Lực vít đo được -->
+        <div class="form-group">
+            <label>LỰC VÍT ĐO ĐƯỢC (kgf.cm)</label>
+            <input type="number" name="lucVitDD" placeholder="0" required>
+        </div>
+        
+        <!-- Mức lực trên tua vít máy -->
+        <div class="form-group">
+            <label>MỨC LỰC TRÊN TUA VÍT MÁY</label>
+            <input type="number" name="mucLuc" placeholder="0" required>
+        </div>
+        
         <!-- Ghi chú -->
         <div class="form-group">
             <label>GHI CHÚ</label>
