@@ -65,14 +65,16 @@
 <body>
 
 <div class="container">
-  <h2>Nhập nhiệt độ</h2>
+  <h2>KIỂM TRA NHIỆT ĐỘ MŨI HÀN</h2>
 
-  <label>Mã máy</label>
-  <select id="maMay">
-    <option value="">-- Chọn mã máy --</option>
-    <option value="MAY-01">MAY-01</option>
-    <option value="MAY-02">MAY-02</option>
-    <option value="MAY-03">MAY-03</option>
+  <label>BỘ PHẬN SỬ DỤNG</label>
+  <select id="maBP">
+    <option value="">-- Chọn bộ phận --</option>
+    <option value="GCBM">GCBM</option>
+    <option value="LR">LR</option>
+    <option value="KD3P">KD3P</option>
+    <option value="KD1P">KD1P</option>
+    <option value="KTSX">KTSX</option>
   </select>
 
   <label>Nhiệt độ (°C)</label>
@@ -87,12 +89,12 @@
 const URL_API = "https://script.google.com/macros/s/AKfycbzBnd8Cgn95aHidz_SgAZO6kRqZEsAKySJhqY1mB-HmKzG-PkHY9xQGYAL2ZW_R7y_iQg/exec";
 
 function guiDuLieu() {
-  const maMay = document.getElementById("maMay").value;
+  const maBP = document.getElementById("maBP").value;
   const nhietDo = document.getElementById("nhietDo").value;
   const msg = document.getElementById("msg");
 
   // Validation
-  if (!maMay) {
+  if (!maBP) {
     msg.innerText = "Vui lòng chọn mã máy";
     msg.style.color = "red";
     return;
@@ -105,7 +107,7 @@ function guiDuLieu() {
   }
 
   const data = {
-    maMay: maMay,
+    maBP: maBP,
     nhietDo: nhietDo
   };
 
@@ -119,7 +121,7 @@ function guiDuLieu() {
     msg.style.color = "green";
 
     document.getElementById("nhietDo").value = "";
-    document.getElementById("maMay").value = "";
+    document.getElementById("maBP").value = "";
   })
   .catch(() => {
     msg.innerText = "Lỗi gửi dữ liệu";
