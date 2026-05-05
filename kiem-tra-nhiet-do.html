@@ -5,27 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kiểm tra nhiệt độ mũi hàn</title>
     <style>
-        body { background-color: #00befa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; padding: 20px; }
-        .form-container { background-color: white; padding: 30px; border-radius: 15px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        h2 { text-align: center; text-transform: uppercase; font-weight: bold; margin-bottom: 25px; color: #333; }
+        /* Giao diện tổng thể */
+        body { 
+            background-color: #00befa; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            padding: 20px; 
+            margin: 0;
+        }
+
+        .form-container { 
+            background-color: white; 
+            padding: 30px; 
+            border-radius: 15px; 
+            width: 100%; 
+            max-width: 450px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+        }
+
+        h2 { 
+            text-align: center; 
+            text-transform: uppercase; 
+            font-weight: bold; 
+            margin-bottom: 25px; 
+            color: #333; 
+            font-size: 20px;
+        }
+
+        /* Group các ô nhập liệu */
         .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-size: 13px; color: #444; }
-        input[type="text"], select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+
+        label { 
+            display: block; 
+            font-weight: bold; 
+            margin-bottom: 5px; 
+            text-transform: uppercase; 
+            font-size: 13px; 
+            color: #444; 
+        }
+
+        input[type="text"], 
+        input[type="number"], 
+        select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus { border-color: #5bb1f9; box-shadow: 0 0 5px rgba(91,177,249,0.3); }
+
+        /* Radio buttons */
         .radio-group { display: flex; gap: 20px; padding: 10px 0; }
-        .radio-item { display: flex; align-items: center; gap: 5px; }
-        .required { color: red; }
-        button { width: 100%; background-color: #5bb1f9; color: white; border: none; padding: 15px; border-radius: 10px; font-size: 16px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        button:hover { background-color: #3b9deb; }
-        button:disabled { background-color: #ccc; }
+        .radio-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+
+        /* Khu vực nút bấm */
+        .button-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .row-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        .btn-submit:hover { background-color: #0056b3; transform: translateY(-1px); }
+
+        .btn-reset {
+            flex: 1;
+            background-color: #dc3545;
+            color: white;
+            padding: 12px;
+        }
+
+        .btn-reset:hover { background-color: #a71d2a; }
+
+        .btn-back {
+            flex: 1;
+            background-color: #6c757d;
+            color: white;
+            padding: 12px;
+        }
+
+        .btn-back:hover { background-color: #545b62; }
+
+        button:disabled {
+            background-color: #ccc !important;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <h2>KIỂM TRA NHIỆT ĐỘ MŨI HÀN</h2>
+    <h2>Kiểm tra nhiệt độ mũi hàn</h2>
+    
     <form id="tempForm">
+        <!-- Bộ phận -->
         <div class="form-group">
-            <label>BỘ PHẬN SỬ DỤNG</label>
+            <label>Bộ phận sử dụng</label>
             <select name="boPhan" required>
                 <option value="">-- Chọn bộ phận --</option>
                 <option value="GCBM">GCBM</option>
@@ -36,49 +144,62 @@
             </select>
         </div>
 
+        <!-- Người thực hiện -->
         <div class="form-group">
-            <label>NGƯỜI THỰC HIỆN</label>
-            <input type="text" name="nguoiThucHien" required>
+            <label>Người thực hiện</label>
+            <input type="text" name="nguoiThucHien" placeholder="Nhập tên người kiểm tra" required>
         </div>
 
+        <!-- Mã máy -->
         <div class="form-group">
-            <label>MÃ MÁY</label>
-            <input type="text" name="maMay" placeholder="Nhập mã máy (VD: 001)" required>
+            <label>Mã máy</label>
+            <input type="text" name="maMay" placeholder="VD: 001, 002..." required>
         </div>
 
+        <!-- Loại kiểm tra -->
         <div class="form-group">
-            <label>LOẠI KIỂM TRA</label>
+            <label>Loại kiểm tra</label>
             <div class="radio-group">
-                <div class="radio-item">
-                    <input type="radio" id="dinhky" name="loaiKiemTra" value="Định kỳ" required>
-                    <label for="dinhky" style="text-transform: none; margin:0;">Định kỳ</label>
-                </div>
-                <div class="radio-item">
-                    <input type="radio" id="suachua" name="loaiKiemTra" value="Sửa chữa">
-                    <label for="suachua" style="text-transform: none; margin:0;">Sửa chữa</label>
-                </div>
+                <label class="radio-item">
+                    <input type="radio" name="loaiKiemTra" value="Định kỳ" required> Định kỳ
+                </label>
+                <label class="radio-item">
+                    <input type="radio" name="loaiKiemTra" value="Sửa chữa"> Sửa chữa
+                </label>
             </div>
         </div>
 
+        <!-- Nhiệt độ cài đặt -->
         <div class="form-group">
-            <label>NHIỆT ĐỘ CÀI ĐẶT</label>
-            <input type="number" name="nhietDoCaiDat" required>
+            <label>Nhiệt độ cài đặt (°C)</label>
+            <input type="number" name="nhietDoCaiDat" placeholder="0" required>
         </div>
 
+        <!-- Nhiệt độ thực tế -->
         <div class="form-group">
-            <label>NHIỆT ĐỘ THỰC TẾ</label>
-            <input type="number" name="nhietDoThucTe" required>
+            <label>Nhiệt độ thực tế (°C)</label>
+            <input type="number" name="nhietDoThucTe" placeholder="0" required>
         </div>
 
+        <!-- Ghi chú -->
         <div class="form-group">
-            <label>GHI CHÚ</label>
-            <input type="text" name="ghiChu">
+            <label>Ghi chú</label>
+            <input type="text" name="ghiChu" placeholder="Nếu có...">
         </div>
 
-        <button type="submit" id="submitBtn">GỬI DỮ LIỆU</button>
-        
-        <div class="form-group">
-            <button href="lay-mau-ban-thanh-pham.html">QUAY VỀ MENU</button>
+        <!-- Nhóm nút bấm -->
+        <div class="button-stack">
+            <!-- Nút gửi chính -->
+            <button type="submit" id="submitBtn" class="btn-submit">Gửi dữ liệu</button>
+            
+            <div class="row-buttons">
+                <!-- Nút Xóa dữ liệu -->
+                <button type="button" class="btn-reset" onclick="resetForm()">Xóa nhập lại</button>
+                
+                <!-- Nút Quay về -->
+                <!-- Thay 'index.html' bằng file bạn muốn quay về -->
+                <button type="button" class="btn-back" onclick="goToMenu()">Quay về</button>
+            </div>
         </div>
     </form>
 </div>
@@ -87,39 +208,54 @@
     const form = document.getElementById('tempForm');
     const btn = document.getElementById('submitBtn');
 
-    // ĐOẠN CODE KẾT NỐI CHÍNH
+    // Hàm xử lý khi gửi form
     form.addEventListener('submit', e => {
         e.preventDefault();
-        btn.disabled = true;
-        btn.innerText = "ĐANG GỬI...";
+        
+        if(!confirm("Xác nhận gửi dữ liệu này lên hệ thống?")) return;
 
-        // THAY LINK WEB APP CỦA BẠN VÀO ĐÂY
+        btn.disabled = true;
+        btn.innerText = "Đang gửi...";
+
+        // Link Google Apps Script của bạn
         const webAppUrl = 'https://script.google.com/macros/s/AKfycbzHGCfk11Ti7rwAu0evTnG-6fgSUxCcDAKCoqUq-wVDrzb01ez8cLIQfmiS4bLVQ9aHFQ/exec';
 
-        // Lấy dữ liệu từ form
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        // Gửi dữ liệu bằng Fetch API (kết nối với Google Sheets)
         fetch(webAppUrl, {
             method: 'POST',
-            mode: 'no-cors', // Quan trọng để tránh lỗi CORS
+            mode: 'no-cors', 
             cache: 'no-cache',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
         .then(() => {
-            alert("Gửi dữ liệu lên Google Sheet thành công!");
+            alert("Gửi dữ liệu thành công!");
             form.reset();
-            btn.disabled = false;
-            btn.innerText = "GỬI DỮ LIỆU";
         })
         .catch(error => {
             console.error('Lỗi:', error);
-            alert("Có lỗi xảy ra khi gửi dữ liệu.");
+            alert("Lỗi kết nối! Vui lòng thử lại.");
+        })
+        .finally(() => {
             btn.disabled = false;
+            btn.innerText = "Gửi dữ liệu";
         });
     });
+
+    // Hàm xóa dữ liệu các ô
+    function resetForm() {
+        if (confirm("Bạn có muốn xóa toàn bộ thông tin đã nhập không?")) {
+            form.reset();
+        }
+    }
+
+    // Hàm chuyển trang quay về
+    function goToMenu() {
+        // Thay đường dẫn file của bạn vào đây
+        window.location.href = 'index.html'; 
+    }
 </script>
 
 </body>
