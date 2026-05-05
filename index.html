@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Kiểm Tra Sản Xuất</title>
-    <!-- Thêm Font Awesome để dùng Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -13,7 +12,7 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #00befa 0%, #008ebc 100%); /* Đổi màu gradient cho hiện đại */
+            background: linear-gradient(135deg, #00befa 0%, #008ebc 100%);
             margin: 0;
         }
 
@@ -21,11 +20,11 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            width: 90%; 
-            max-width: 350px; 
+            width: 95%; 
+            max-width: 400px; 
             background-color: #ffffff;
             padding: 30px 20px;
-            border-radius: 24px; /* Bo tròn hơn nhìn sẽ mượt hơn */
+            border-radius: 24px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
             text-align: center;
         }
@@ -34,19 +33,27 @@
             color: #2c3e50;
             margin-top: 0;
             margin-bottom: 25px;
-            font-size: 20px;
+            font-size: 18px;
             letter-spacing: 1px;
             text-transform: uppercase;
             border-bottom: 2px solid #eee;
             padding-bottom: 15px;
         }
 
+        /* Wrapper để chứa 2 nút nằm ngang */
+        .menu-row {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+
+        /* Nút chính */
         .btn {
+            flex: 1; /* Chiếm phần lớn chiều ngang */
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* Căn lề trái để icon và chữ thẳng hàng */
-            padding: 16px 20px;
-            font-size: 16px;
+            padding: 16px 15px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             border: none;
@@ -57,34 +64,46 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Thêm khoảng cách cho icon */
+        /* Nút thống kê nhỏ */
+        .btn-stats {
+            width: 55px; /* Chiều rộng cố định cho nút nhỏ */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #576574; /* Màu xám trung tính cho thống kê */
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         .btn i {
-            margin-right: 15px;
-            font-size: 20px;
-            width: 25px;
+            margin-right: 12px;
+            font-size: 18px;
+            width: 20px;
             text-align: center;
         }
 
-        /* Màu sắc hiện đại hơn */
+        /* Màu sắc */
         .btn-temp { background-color: #e74c3c; }
         .btn-force { background-color: #3498db; }
         .btn-sample { background-color: #27ae60; }
 
-        /* Hiệu ứng */
-        .btn:hover {
+        /* Hiệu ứng Hover */
+        .btn:hover, .btn-stats:hover {
             transform: translateY(-2px);
+            filter: brightness(1.1);
             box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-            filter: brightness(1.05);
-        }
-        
-        .btn:active {
-            transform: scale(0.96);
         }
 
-        /* Responsive cho màn hình rất nhỏ */
+        .btn:active, .btn-stats:active {
+            transform: scale(0.95);
+        }
+
         @media (max-width: 320px) {
-            h2 { font-size: 18px; }
-            .btn { font-size: 14px; padding: 14px; }
+            h2 { font-size: 16px; }
+            .btn { font-size: 13px; }
         }
     </style>
 </head>
@@ -93,20 +112,35 @@
     <div class="container">
         <h2><i class="fas fa-clipboard-list"></i> DANH MỤC KIỂM TRA</h2>
 
-        <a href="kiem-tra-nhiet-do.html" class="btn btn-temp">
-            <i class="fas fa-thermometer-half"></i>
-            Kiểm tra nhiệt độ mũi hàn
-        </a>
+        <!-- Dòng 1 -->
+        <div class="menu-row">
+            <a href="kiem-tra-nhiet-do.html" class="btn btn-temp">
+                <i class="fas fa-thermometer-half"></i> Nhiệt độ mũi hàn
+            </a>
+            <a href="thong-ke-nhiet-do.html" class="btn-stats" title="Thống kê">
+                <i class="fas fa-chart-line"></i>
+            </a>
+        </div>
 
-        <a href="kiem-tra-luc-vit.html" class="btn btn-force">
-            <i class="fas fa-tools"></i>
-            Kiểm tra lực vít máy
-        </a>
+        <!-- Dòng 2 -->
+        <div class="menu-row">
+            <a href="kiem-tra-luc-vit.html" class="btn btn-force">
+                <i class="fas fa-tools"></i> Lực vít máy
+            </a>
+            <a href="thong-ke-luc-vit.html" class="btn-stats" title="Thống kê">
+                <i class="fas fa-chart-bar"></i>
+            </a>
+        </div>
 
-        <a href="lay-mau-ban-thanh-pham.html" class="btn btn-sample">
-            <i class="fas fa-box-open"></i>
-            Lấy mẫu bán thành phẩm
-        </a>
+        <!-- Dòng 3 -->
+        <div class="menu-row">
+            <a href="lay-mau-ban-thanh-pham.html" class="btn btn-sample">
+                <i class="fas fa-box-open"></i> Lấy mẫu bán thành phẩm
+            </a>
+            <a href="thong-ke-lay-mau.html" class="btn-stats" title="Thống kê">
+                <i class="fas fa-pie-chart"></i>
+            </a>
+        </div>
     </div>
 
 </body>
