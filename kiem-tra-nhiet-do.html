@@ -202,59 +202,42 @@
     </form>
 </div>
 
-<script>
-    const form = document.getElementById('tempForm');
-    const btn = document.getElementById('submitBtn');
+<script src="script.js"></script>
 
-    // Hàm xử lý khi gửi form
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        
-        // if(!confirm("Xác nhận gửi dữ liệu này lên hệ thống?")) return;
+    <script>
+        const form = document.getElementById('tempForm');
+        const btn = document.getElementById('submitBtn');
 
-        btn.disabled = true;
-        btn.innerText = "Đang gửi...";
+        // Xử lý sự kiện gửi form
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            btn.disabled = true;
+            btn.innerText = "Đang gửi...";
 
-        // Link Google Apps Script của bạn
-        const webAppUrl = 'https://script.google.com/macros/s/AKfycbyHYFECD56GBd16fKWwObIwoZJ_n4qSwM3lg4a-W8LEpThVYmvNRXsCIwseQo73WhUHfw/exec';
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        fetch(webAppUrl, {
-            method: 'POST',
-            mode: 'no-cors', 
-            cache: 'no-cache',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        .then(() => {
-            alert("Gửi dữ liệu thành công!");
-            form.reset();
-        })
-        .catch(error => {
-            console.error('Lỗi:', error);
-            alert("Lỗi kết nối! Vui lòng thử lại.");
-        })
-        .finally(() => {
-            btn.disabled = false;
-            btn.innerText = "GỬI DỮ LIỆU";
+            try {
+                // Gọi hàm từ file script.js đã tách
+                await sendDataToGoogleSheet(data);
+                
+                alert("Gửi dữ liệu thành công!");
+                form.reset();
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert("Lỗi kết nối! Vui lòng thử lại.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "GỬI DỮ LIỆU";
+            }
         });
-    });
 
-    // Hàm xóa dữ liệu các ô
-    function resetForm() {
-        if (confirm("Bạn có muốn xóa toàn bộ thông tin đã nhập không?")) {
-            form.reset();
+        // Hàm reset gọi hàm bổ trợ trong script.js
+        function handleReset() {
+            resetForm(form);
         }
-    }
-
-    // Hàm chuyển trang quay về
-    function goToMenu() {
-        // Thay đường dẫn file của bạn vào đây
-        window.location.href = 'index.html'; 
-    }
-</script>
+    </script>
 
 </body>
 </html>
