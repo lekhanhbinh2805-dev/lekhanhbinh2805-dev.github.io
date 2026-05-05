@@ -6,68 +6,71 @@
     <title>Menu Kiểm Tra Sản Xuất</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f4f4f9;
+            background-color: #f0f2f5;
             margin: 0;
         }
 
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Container chuyển sang chiều dọc */
         .container {
             display: flex;
-            gap: 20px;
+            flex-direction: column; /* Xếp hàng dọc */
+            gap: 15px; /* Khoảng cách giữa các nút */
+            width: 300px; /* Độ rộng cố định cho các nút bằng nhau */
         }
 
         .btn {
-            padding: 15px 25px;
+            padding: 18px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             color: white;
-            transition: transform 0.2s, background-color 0.3s;
+            transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
+            text-align: center; /* Căn chữ giữa nút */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        /* Màu sắc riêng cho từng nút */
-        .btn-temp { background-color: #e74c3c; } /* Đỏ */
-        .btn-force { background-color: #3498db; } /* Xanh dương */
-        .btn-sample { background-color: #27ae60; } /* Xanh lá */
+        /* Màu sắc */
+        .btn-temp { background-color: #d32f2f; }
+        .btn-force { background-color: #1976d2; }
+        .btn-sample { background-color: #388e3c; }
 
-        /* Hiệu ứng khi di chuột vào */
+        /* Hiệu ứng hover */
         .btn:hover {
-            transform: translateY(-3px);
-            opacity: 0.9;
-        }
-
-        .btn:active {
-            transform: translateY(0);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            filter: brightness(1.1);
         }
     </style>
 </head>
 <body>
 
-    <h2>HỆ THỐNG KIỂM TRA SẢN XUẤT</h2>
+    <h2>DANH MỤC KIỂM TRA</h2>
 
     <div class="container">
-        <!-- Nút 1 -->
-        <a href="kiem-tra-nhiet-do.html">
-            <button class="btn btn-temp">Kiểm tra nhiệt độ mũi hàn</button>
+        <a href="kiem-tra-nhiet-do.html" class="btn btn-temp">
+            Kiểm tra nhiệt độ mũi hàn
         </a>
 
-        <!-- Nút 2 -->
-        <a href="kiem-tra-luc-vit.html">
-            <button class="btn btn-force">Kiểm tra lực vít máy</button>
+        <a href="kiem-tra-luc-vit.html" class="btn btn-force">
+            Kiểm tra lực vít máy
         </a>
 
-        <!-- Nút 3 -->
-        <a href="lay-mau-ban-thanh-pham.html">
-            <button class="btn btn-sample">Lấy mẫu bán thành phẩm</button>
+        <a href="lay-mau-ban-thanh-pham.html" class="btn btn-sample">
+            Lấy mẫu bán thành phẩm
         </a>
     </div>
 
