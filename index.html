@@ -4,91 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Kiểm Tra Sản Xuất</title>
+    <!-- Thêm Font Awesome để dùng Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            /* 1. Đổi màu nền thành màu xanh da trời */
-            background-color: #00befa; 
+            min-height: 100vh;
+            background: linear-gradient(135deg, #00befa 0%, #008ebc 100%); /* Đổi màu gradient cho hiện đại */
             margin: 0;
         }
 
-        /* 2. Chỉnh sửa Container */
         .container {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            width: 80%; /* Co giãn theo màn hình nhỏ */
-            max-width: 320px; /* Độ rộng tối đa của khung trắng */
-            background-color: white; /* Khung bao màu trắng */
-            padding: 40px 30px; /* Khoảng cách đệm bên trong */
-            border-radius: 20px; /* Bo góc khung trắng */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+            width: 90%; 
+            max-width: 350px; 
+            background-color: #ffffff;
+            padding: 30px 20px;
+            border-radius: 24px; /* Bo tròn hơn nhìn sẽ mượt hơn */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
             text-align: center;
         }
 
         h2 {
-            color: #333;
-            margin-top: 0; /* Loại bỏ khoảng cách phía trên tiêu đề */
-            margin-bottom: 30px;
-            font-size: 24px;
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 20px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            font-weight: bold;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
         }
 
         .btn {
-            padding: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Căn lề trái để icon và chữ thẳng hàng */
+            padding: 16px 20px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             color: white;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             text-decoration: none;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Màu sắc các nút */
-        .btn-temp { background-color: #d32f2f; }
-        .btn-force { background-color: #1976d2; }
-        .btn-sample { background-color: #388e3c; }
+        /* Thêm khoảng cách cho icon */
+        .btn i {
+            margin-right: 15px;
+            font-size: 20px;
+            width: 25px;
+            text-align: center;
+        }
 
-        /* Hiệu ứng hover */
+        /* Màu sắc hiện đại hơn */
+        .btn-temp { background-color: #e74c3c; }
+        .btn-force { background-color: #3498db; }
+        .btn-sample { background-color: #27ae60; }
+
+        /* Hiệu ứng */
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            filter: brightness(1.05);
         }
         
         .btn:active {
-            transform: scale(0.98);
+            transform: scale(0.96);
+        }
+
+        /* Responsive cho màn hình rất nhỏ */
+        @media (max-width: 320px) {
+            h2 { font-size: 18px; }
+            .btn { font-size: 14px; padding: 14px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>DANH MỤC KIỂM TRA</h2>
+        <h2><i class="fas fa-clipboard-list"></i> DANH MỤC KIỂM TRA</h2>
 
         <a href="kiem-tra-nhiet-do.html" class="btn btn-temp">
+            <i class="fas fa-thermometer-half"></i>
             Kiểm tra nhiệt độ mũi hàn
         </a>
 
         <a href="kiem-tra-luc-vit.html" class="btn btn-force">
+            <i class="fas fa-tools"></i>
             Kiểm tra lực vít máy
         </a>
 
         <a href="lay-mau-ban-thanh-pham.html" class="btn btn-sample">
+            <i class="fas fa-box-open"></i>
             Lấy mẫu bán thành phẩm
-        </a>
-        
-        <a href="thong-ke-luc-vit.html" class="btn btn-sample">
-            Thống kê lực viết
         </a>
     </div>
 
