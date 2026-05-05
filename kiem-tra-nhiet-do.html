@@ -212,13 +212,13 @@
     form.addEventListener('submit', e => {
         e.preventDefault();
         
-        if(!confirm("Xác nhận gửi dữ liệu này lên hệ thống?")) return;
+        // if(!confirm("Xác nhận gửi dữ liệu này lên hệ thống?")) return;
 
         btn.disabled = true;
         btn.innerText = "Đang gửi...";
 
         // Link Google Apps Script của bạn
-        const webAppUrl = 'https://script.google.com/macros/s/AKfycbzHGCfk11Ti7rwAu0evTnG-6fgSUxCcDAKCoqUq-wVDrzb01ez8cLIQfmiS4bLVQ9aHFQ/exec';
+        const webAppUrl = 'https://script.google.com/macros/s/AKfycbyHYFECD56GBd16fKWwObIwoZJ_n4qSwM3lg4a-W8LEpThVYmvNRXsCIwseQo73WhUHfw/exec';
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
