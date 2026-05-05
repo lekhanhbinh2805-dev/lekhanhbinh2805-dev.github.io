@@ -145,7 +145,7 @@
         <!-- Người thực hiện -->
         <div class="form-group">
             <label>NGƯỜI THỰC HIỆN</label>
-            <input type="text" name="nguoiThucHien2" placeholder="Nhập tên người kiểm tra" required>
+            <input type="text" name="nguoiThucHien1" placeholder="Nhập tên người kiểm tra" required>
         </div>
 
         <!-- Mã máy -->
@@ -159,13 +159,13 @@
             <label>LOẠI KIỂM TRA</label>
             <div class="radio-group">
                 <label class="radio-item">
-                    <input type="radio" name="loaiKiemTra2" value="Định kỳ" required> Định kỳ
+                    <input type="radio" name="loaiKiemTra1" value="Định kỳ" required> Định kỳ
                 </label>
                 <label class="radio-item">
-                    <input type="radio" name="loaiKiemTra2" value="Thay đổi vị trí"> Thay đổi vị trí
+                    <input type="radio" name="loaiKiemTra1" value="Sửa chữa"> Sửa chữa
                 </label>
                 <label class="radio-item">
-                    <input type="radio" name="loaiKiemTra2" value="Sửa chữa"> Sửa chữa
+                    <input type="radio" name="loaiKiemTra1" value="Thay đổi vị trí"> Thay đổi vị trí
                 </label>
             </div>
         </div>
@@ -173,19 +173,19 @@
         <!-- Nhiệt độ cài đặt -->
         <div class="form-group">
             <label>NHIỆT ĐỘ CÀI ĐẶT (°C)</label>
-            <input type="number" name="nhietDoCaiDat" placeholder="0" required>
+            <input type="number" name="nhietDoCaiDat12" placeholder="0" required>
         </div>
 
         <!-- Nhiệt độ thực tế -->
         <div class="form-group">
             <label>NHIỆT ĐỘ THỰC TẾ (°C)</label>
-            <input type="number" name="nhietDoThucTe" placeholder="0" required>
+            <input type="number" name="nhietDoThucTe12" placeholder="0" required>
         </div>
 
         <!-- Ghi chú -->
         <div class="form-group">
             <label>GHI CHÚ</label>
-            <input type="text" name="ghiChu" placeholder="Nếu có...">
+            <input type="text" name="ghiChu1" placeholder="Nếu có...">
         </div>
 
         <!-- Nhóm nút bấm -->
@@ -205,58 +205,41 @@
     </form>
 </div>
 
-<script>
-    const form = document.getElementById('tempForm');
-    const btn = document.getElementById('submitBtn');
+<script src="script.js"></script>
 
-    // Hàm xử lý khi gửi form
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        
-        // if(!confirm("Xác nhận gửi dữ liệu này lên hệ thống?")) return;
+    <script>
+        const form = document.getElementById('tempForm');
+        const btn = document.getElementById('submitBtn');
 
-        btn.disabled = true;
-        btn.innerText = "Đang gửi...";
+        // Xử lý sự kiện gửi form
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            btn.disabled = true;
+            btn.innerText = "Đang gửi...";
 
-        // Link Google Apps Script của bạn
-        const webAppUrl = 'https://script.google.com/macros/s/AKfycbyHYFECD56GBd16fKWwObIwoZJ_n4qSwM3lg4a-W8LEpThVYmvNRXsCIwseQo73WhUHfw/exec';
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        fetch(webAppUrl, {
-            method: 'POST',
-            mode: 'no-cors', 
-            cache: 'no-cache',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        .then(() => {
-            alert("Gửi dữ liệu thành công!");
-            form.reset();
-        })
-        .catch(error => {
-            console.error('Lỗi:', error);
-            alert("Lỗi kết nối! Vui lòng thử lại.");
-        })
-        .finally(() => {
-            btn.disabled = false;
-            btn.innerText = "GỬI DỮ LIỆU";
+            try {
+                // Gọi hàm từ file script.js đã tách
+                await sendDataToGoogleSheet(data);
+                
+                alert("Gửi dữ liệu thành công!");
+                form.reset();
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert("Lỗi kết nối! Vui lòng thử lại.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "GỬI DỮ LIỆU";
+            }
         });
-    });
 
-    // Hàm xóa dữ liệu các ô
-    function resetForm() {
-        if (confirm("Bạn có muốn xóa toàn bộ thông tin đã nhập không?")) {
-            form.reset();
+        // Hàm reset gọi hàm bổ trợ trong script.js
+        function handleReset() {
+            resetForm(form);
         }
-    }
-
-    // Hàm chuyển trang quay về
-    function goToMenu() {
-        // Thay đường dẫn file của bạn vào đây
-        window.location.href = 'index.html'; 
-    }
 </script>
 
 </body>
