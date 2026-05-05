@@ -30,7 +30,7 @@
             font-weight: bold; 
             margin-bottom: 25px; 
             color: #333; 
-            font-size: 20px;
+            font-size: 22px;
         }
 
         /* Group các ô nhập liệu */
@@ -40,7 +40,6 @@
             display: block; 
             font-weight: bold; 
             margin-bottom: 5px; 
-            text-transform: uppercase; 
             font-size: 13px; 
             color: #444; 
         }
@@ -94,7 +93,6 @@
             color: white;
             padding: 15px;
             font-size: 16px;
-            text-transform: uppercase;
         }
 
         .btn-submit:hover { background-color: #0056b3; transform: translateY(-1px); }
@@ -128,12 +126,12 @@
 <body>
 
 <div class="form-container">
-    <h2>Kiểm tra nhiệt độ mũi hàn</h2>
+    <h2>KIỂM TRA NHIỆT ĐỘ MŨI HÀN</h2>
     
     <form id="tempForm">
         <!-- Bộ phận -->
         <div class="form-group">
-            <label>Bộ phận sử dụng</label>
+            <label>BỘ PHẬN SỬ DỤNG</label>
             <select name="boPhan" required>
                 <option value="">-- Chọn bộ phận --</option>
                 <option value="GCBM">GCBM</option>
@@ -146,19 +144,19 @@
 
         <!-- Người thực hiện -->
         <div class="form-group">
-            <label>Người thực hiện</label>
+            <label>NGƯỜI THỰC HIỆN</label>
             <input type="text" name="nguoiThucHien" placeholder="Nhập tên người kiểm tra" required>
         </div>
 
         <!-- Mã máy -->
         <div class="form-group">
-            <label>Mã máy</label>
+            <label>MÃ MÁY HÀN</label>
             <input type="text" name="maMay" placeholder="VD: 001, 002..." required>
         </div>
 
         <!-- Loại kiểm tra -->
         <div class="form-group">
-            <label>Loại kiểm tra</label>
+            <label>LOẠI KIỂM TRA</label>
             <div class="radio-group">
                 <label class="radio-item">
                     <input type="radio" name="loaiKiemTra" value="Định kỳ" required> Định kỳ
@@ -171,34 +169,34 @@
 
         <!-- Nhiệt độ cài đặt -->
         <div class="form-group">
-            <label>Nhiệt độ cài đặt (°C)</label>
+            <label>NHIỆT ĐỘ CÀI ĐẶT (°C)</label>
             <input type="number" name="nhietDoCaiDat" placeholder="0" required>
         </div>
 
         <!-- Nhiệt độ thực tế -->
         <div class="form-group">
-            <label>Nhiệt độ thực tế (°C)</label>
+            <label>NHIỆT ĐỘ THỰC TẾ (°C)</label>
             <input type="number" name="nhietDoThucTe" placeholder="0" required>
         </div>
 
         <!-- Ghi chú -->
         <div class="form-group">
-            <label>Ghi chú</label>
+            <label>GHI CHÚ</label>
             <input type="text" name="ghiChu" placeholder="Nếu có...">
         </div>
 
         <!-- Nhóm nút bấm -->
         <div class="button-stack">
             <!-- Nút gửi chính -->
-            <button type="submit" id="submitBtn" class="btn-submit">Gửi dữ liệu</button>
+            <button type="submit" id="submitBtn" class="btn-submit">GỬI DỮ LIỆU</button>
             
             <div class="row-buttons">
                 <!-- Nút Xóa dữ liệu -->
-                <button type="button" class="btn-reset" onclick="resetForm()">Xóa nhập lại</button>
+                <button type="button" class="btn-reset" onclick="resetForm()">XÓA NHẬP LẠI</button>
                 
                 <!-- Nút Quay về -->
                 <!-- Thay 'index.html' bằng file bạn muốn quay về -->
-                <button type="button" class="btn-back" onclick="goToMenu()">Quay về</button>
+                <button type="button" class="btn-back" onclick="goToMenu()">QUAU VỀ MENU</button>
             </div>
         </div>
     </form>
