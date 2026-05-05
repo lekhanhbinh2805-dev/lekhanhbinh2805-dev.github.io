@@ -77,8 +77,8 @@
     <option value="KTSX">KTSX</option>
   </select>
 
-  <label>Nhiệt độ (°C)</label>
-  <input type="number" id="nhietDo" placeholder="Nhập nhiệt độ">
+  <label>MÃ MÁY</label>
+  <input type="number" id="maMay" placeholder="Nhập mã máy (VD: 001)">
 
   <button onclick="guiDuLieu()">Gửi dữ liệu</button>
 
@@ -90,17 +90,17 @@ const URL_API = "https://script.google.com/macros/s/AKfycbzBnd8Cgn95aHidz_SgAZO6
 
 function guiDuLieu() {
   const maBP = document.getElementById("maBP").value;
-  const nhietDo = document.getElementById("nhietDo").value;
+  const maMay = document.getElementById("maMay").value;
   const msg = document.getElementById("msg");
 
   // Validation
   if (!maBP) {
-    msg.innerText = "Vui lòng chọn mã máy";
+    msg.innerText = "Vui lòng chọn bộ phận";
     msg.style.color = "red";
     return;
   }
 
-  if (!nhietDo || nhietDo < 0 || nhietDo > 500) {
+  if (!maMay || maMay < 0 || maMay > 500) {
     msg.innerText = "Nhiệt độ không hợp lệ (0-500°C)";
     msg.style.color = "red";
     return;
@@ -108,7 +108,7 @@ function guiDuLieu() {
 
   const data = {
     maBP: maBP,
-    nhietDo: nhietDo
+    maMay: maMay
   };
 
   fetch(URL_API, {
@@ -120,7 +120,7 @@ function guiDuLieu() {
     msg.innerText = "Lưu thành công";
     msg.style.color = "green";
 
-    document.getElementById("nhietDo").value = "";
+    document.getElementById("maMay").value = "";
     document.getElementById("maBP").value = "";
   })
   .catch(() => {
