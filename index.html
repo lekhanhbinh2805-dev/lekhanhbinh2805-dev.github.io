@@ -8,30 +8,34 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f0f2f5;
+            /* 1. Đổi màu nền thành màu xanh da trời */
+            background-color: #00befa; 
             margin: 0;
+        }
+
+        /* 2. Chỉnh sửa Container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 90%; /* Co giãn theo màn hình nhỏ */
+            max-width: 400px; /* Độ rộng tối đa của khung trắng */
+            background-color: white; /* Khung bao màu trắng */
+            padding: 40px 30px; /* Khoảng cách đệm bên trong */
+            border-radius: 20px; /* Bo góc khung trắng */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+            text-align: center;
         }
 
         h2 {
             color: #333;
+            margin-top: 0; /* Loại bỏ khoảng cách phía trên tiêu đề */
             margin-bottom: 30px;
-        }
-
-        /* Container chuyển sang chiều dọc */
-        .container {
-            display: flex;
-            flex-direction: column; /* Xếp hàng dọc */
-            gap: 15px; /* Khoảng cách giữa các nút */
-            width: 300px; /* Độ rộng cố định cho các nút bằng nhau */
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px; width: 100%;
-            max-width: 450px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+            font-size: 22px;
+            text-transform: uppercase;
         }
 
         .btn {
@@ -44,28 +48,32 @@
             color: white;
             transition: all 0.3s ease;
             text-decoration: none;
-            text-align: center; /* Căn chữ giữa nút */
+            text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        /* Màu sắc */
+        /* Màu sắc các nút */
         .btn-temp { background-color: #d32f2f; }
         .btn-force { background-color: #1976d2; }
         .btn-sample { background-color: #388e3c; }
 
         /* Hiệu ứng hover */
         .btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
             filter: brightness(1.1);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
 
-    <h2>DANH MỤC KIỂM TRA</h2>
-
     <div class="container">
+        <h2>DANH MỤC KIỂM TRA</h2>
+
         <a href="kiem-tra-nhiet-do.html" class="btn btn-temp">
             Kiểm tra nhiệt độ mũi hàn
         </a>
