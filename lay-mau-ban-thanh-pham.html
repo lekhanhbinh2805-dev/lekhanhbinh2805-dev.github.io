@@ -120,7 +120,10 @@
             cursor: not-allowed;
             transform: none !important;
         }
-
+    /* Ẩn mặc định ô nguyên nhân lỗi */
+    .hidden {
+        display: none;
+    }
     </style>
 </head>
 <body>
@@ -206,10 +209,10 @@
             <input type="number" name="mauKhongDat" min="0" placeholder="Nếu có...">
         </div>
         
-        <!-- Nguyên nhân không đạt -->
-        <div class="form-group">
+        <!-- Nguyên nhân không đạt (Bọc trong div để ẩn/hiện) -->
+        <div class="form-group hidden" id="nguyenNhanWrapper">
             <label>NGUYÊN NHÂN KHÔNG ĐẠT</label>
-            <input type="text" name="nguyenNhan" placeholder="Nếu có...">
+            <input type="text" name="nguyenNhan" id="nguyenNhanInput" placeholder="Nhập lý do cụ thể...">
         </div>
 
         <!-- Nhóm nút bấm -->
