@@ -1,34 +1,24 @@
-// Cấu hình URL Web App của bạn
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxKH2sCNC7AEZTNymUOFHt_irX5uHj-nQHaOJii5BTNLVbhdt7lT_mlVIUC3x1aPNlWCg/exec';
+// Thay link này bằng URL Web App từ Google Apps Script của bạn
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKH2sCNC7AEZTNymUOFHt_irX5uHj-nQHaOJii5BTNLVbhdt7lT_mlVIUC3x1aPNlWCg/exec';
 
-/**
- * Hàm gửi dữ liệu lên Google Sheets
- * @param {Object} data - Dữ liệu từ form
- * @returns {Promise}
- */
 async function sendDataToGoogleSheet(data) {
-    return fetch(WEB_APP_URL, {
+    const response = await fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', 
+        mode: 'no-cors', // Quan trọng để tránh lỗi CORS khi dùng Google Script
         cache: 'no-cache',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     });
+    return response;
 }
 
-/**
- * Hàm điều hướng về Menu
- */
-function goToMenu() {
-    window.location.href = 'index.html'; 
-}
-
-/**
- * Hàm xóa dữ liệu form
- * @param {HTMLFormElement} form 
- */
-function resetForm(form) {
-    if (confirm("Bạn có muốn xóa toàn bộ thông tin đã nhập không?")) {
-        form.reset();
+function resetForm() {
+    if(confirm("Bạn có chắc chắn muốn xóa toàn bộ dữ liệu đã nhập?")) {
+        document.getElementById('tempForm').reset();
     }
+}
+
+function goToMenu() {
+    // Chuyển hướng về trang chủ hoặc menu
+    window.location.href = 'index.html'; 
 }
