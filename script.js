@@ -22,3 +22,39 @@ function goToMenu() {
     // Chuyển hướng về trang chủ hoặc menu
     window.location.href = 'index.html'; 
 }
+const form = document.getElementById('tempForm');
+const btn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // 1. Lấy giá trị từ các ô nhập liệu
+    const tongMau = parseInt(document.getElementsByName('mauKiemTra')[0].value) || 0;
+    const mauDat = parseInt(document.getElementsByName('mauDat')[0].value) || 0;
+    const mauLoi = parseInt(document.getElementsByName('mauKhongDat')[0].value) || 0;
+
+    // 2. Kiểm tra logic toán học
+    if (tongMau !== (mauDat + mauLoi)) {
+        alert(`❌ Dữ liệu không khớp!\nTổng mẫu (${tongMau}) phải bằng Mẫu đạt (${mauDat}) + Mẫu lỗi (${mauLoi}).\nVui lòng kiểm tra lại!`);
+        return; // Dừng lại không gửi dữ liệu
+    }
+
+    // 3. Nếu khớp thì tiến hành gửi dữ liệu
+    btn.disabled = true;
+    btn.innerText = "Đang gửi...";
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+        await sendDataToGoogleSheet(data);
+        alert("✅ Gửi dữ liệu thành công!");
+        form.reset();
+    } catch (error) {
+        console.error('Lỗi:', error);
+        alert("Lỗi kết nối! Vui lòng thử lại.");
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "GỬI DỮ LIỆU";
+    }
+});
