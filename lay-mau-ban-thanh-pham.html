@@ -131,7 +131,7 @@
     <form id="tempForm">
         <!-- Người kiểm tra -->
         <div class="form-group">
-            <label>LOẠI KIỂM TRA</label>
+            <label>NGƯỜI THỰC HIỆN</label>
             <div class="radio-group">
                 <label class="radio-item">
                     <input type="radio" name="nguoiThucHien2" value="Công Bình" required> Công Bình
@@ -152,7 +152,30 @@
                 </label>
             </div>
         </div>
-      
+        <!-- Chủng loại -->
+        <div class="form-group">
+            <label>CHỦNG LOẠI SẢN PHẨM</label>
+            <select name="chungLoai" required>
+                <option value="">-- Chọn chủng loại --</option>
+                <option value="DT01P">SMT, IMT</option>
+                <option value="DT01P60">Hàn linh kiện</option>
+                <option value="DT01P80">Lắp ráp</option>
+                <option value="DT01M10">LT IDSX</option>
+                <option value="DT01M80">Hiệu chỉnh</option>
+                <option value="DT03P">TNMT</option>
+                <option value="DT03P05">LT IDXX</option>
+                <option value="DT03M05">Kiểm định</option>
+                <option value="DT03M10">Đóng gói</option>
+                <option value="PQM3P">LT IDSX</option>
+                <option value="DCU 1P">Hiệu chỉnh</option>
+                <option value="Router">TNMT</option>
+                <option value="Repeater">LT IDXX</option>
+                <option value="RMR">Kiểm định</option>
+                <option value="Elster-RF">Đóng gói</option>
+                <option value="Multimeter-RF">LT IDSX</option>
+                <option value="HHU-INCEU">Hiệu chỉnh</option>
+            </select>
+        </div>
         <!-- Công đoạn lấy mẫu -->
         <div class="form-group">
             <label>CÔNG ĐOẠN LẤY MẪU</label>
@@ -162,55 +185,36 @@
                 <option value="Hàn linh kiện">Hàn linh kiện</option>
                 <option value="Lắp ráp">Lắp ráp</option>
                 <option value="LT IDSX">LT IDSX</option>
-                <option value="Hiệu chỉnh">KĐ3P</option>
-                <option value="TNMT">KĐ1P</option>
-                <option value="LT IDXX">KTSX</option>
-                <option value="KĐ">KĐ1P</option>
-                <option value="ĐG">KTSX</option>
+                <option value="Hiệu chỉnh">Hiệu chỉnh</option>
+                <option value="TNMT">TNMT</option>
+                <option value="LT IDXX">LT IDXX</option>
+                <option value="KĐ">Kiểm định</option>
+                <option value="ĐG">Đóng gói</option>
             </select>
         </div>
 
-        <!-- Người thực hiện -->
+        <!-- Số lượng mẫu kiểm tra -->
         <div class="form-group">
-            <label>NGƯỜI THỰC HIỆN</label>
-            <input type="text" name="nguoiThucHien" placeholder="Nhập tên người kiểm tra" required>
+            <label>SỐ LƯỢNG MẪU KIỂM TRA</label>
+            <input type="number" name="mauKiemTra" required>
         </div>
-
-        <!-- Mã máy -->
+        
+        <!-- Số lượng mẫu Đạt -->
         <div class="form-group">
-            <label>MÃ MÁY HÀN</label>
-            <input type="text" name="maMay" placeholder="VD: 001, 002..." required>
+            <label>SỐ LƯỢNG MẪU ĐẠT</label>
+            <input type="number" name="mauDat" required>
         </div>
-
-        <!-- Loại kiểm tra -->
+        
+        <!-- Số lượng mẫu Không đạt -->
         <div class="form-group">
-            <label>LOẠI KIỂM TRA</label>
-            <div class="radio-group">
-                <label class="radio-item">
-                    <input type="radio" name="loaiKiemTra" value="Định kỳ" required> Định kỳ
-                </label>
-                <label class="radio-item">
-                    <input type="radio" name="loaiKiemTra" value="Sửa chữa"> Sửa chữa
-                </label>
-            </div>
+            <label>SỐ LƯỢNG MẪU KHÔNG ĐẠT</label>
+            <input type="number" name="mauKhongDat" placeholder="Nếu có...">
         </div>
-
-        <!-- Nhiệt độ cài đặt -->
+        
+        <!-- Nguyên nhân không đạt -->
         <div class="form-group">
-            <label>NHIỆT ĐỘ CÀI ĐẶT (°C)</label>
-            <input type="number" name="nhietDoCaiDat" placeholder="Hiển thị trên LCD hoặc trên núm chỉnh nhiệt độ" required>
-        </div>
-
-        <!-- Nhiệt độ thực tế -->
-        <div class="form-group">
-            <label>NHIỆT ĐỘ THỰC TẾ (°C)</label>
-            <input type="number" name="nhietDoThucTe" placeholder="Hiển thị trên máy đo nhiệt độ" required>
-        </div>
-
-        <!-- Ghi chú -->
-        <div class="form-group">
-            <label>GHI CHÚ</label>
-            <input type="text" name="ghiChu" placeholder="Nếu có...">
+            <label>Nguyên nhân không đạt</label>
+            <input type="text" name="nguyenNhan" placeholder="Nếu có...">
         </div>
 
         <!-- Nhóm nút bấm -->
