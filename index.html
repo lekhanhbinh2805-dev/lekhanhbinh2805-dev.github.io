@@ -1,135 +1,144 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html>
 <head>
-  <meta charset="UTF-8">
+  <base target="_top">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KIỂM TRA NHIỆT ĐỘ MŨI HÀN</title>
   <style>
     body {
+      background-color: #00befa;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+      padding: 20px;
     }
-
-    .container {
-      background: white;
-      padding: 25px;
+    .form-container {
+      background-color: white;
+      padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      width: 350px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-
     h2 {
       text-align: center;
-      margin-bottom: 20px;
-    }
-
-    label {
+      text-transform: uppercase;
       font-weight: bold;
+      margin-bottom: 25px;
     }
-
-    input, select {
-      width: 100%;
-      padding: 8px;
-      margin: 8px 0 15px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+    .form-group { margin-bottom: 15px; }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      font-size: 14px;
     }
-
-    button {
+    input[type="text"], select {
       width: 100%;
       padding: 10px;
-      border: none;
-      border-radius: 10px;
-      background: #4facfe;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      padding: 5px 0;
+    }
+    .radio-item { display: flex; align-items: center; gap: 5px; }
+    .required { color: red; }
+    button {
+      width: 100%;
+      background-color: #5bb1f9;
       color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
       font-size: 16px;
       cursor: pointer;
-    }
-
-    button:hover {
-      background: #00c6ff;
-    }
-
-    .message {
-      text-align: center;
       margin-top: 10px;
       font-weight: bold;
     }
+    button:hover { background-color: #4696e2; }
   </style>
 </head>
 <body>
 
-<div class="container">
+<div class="form-container">
   <h2>KIỂM TRA NHIỆT ĐỘ MŨI HÀN</h2>
+  
+  <form id="tempForm" onsubmit="handleFormSubmit(this)">
+    <div class="form-group">
+      <label>BỘ PHẬN SỬ DỤNG</label>
+      <select name="boPhan" required>
+        <option value="">-- Chọn bộ phận --</option>
+        <option value="Sản xuất">Sản xuất</option>
+        <option value="Kỹ thuật">Kỹ thuật</option>
+        <option value="QA">QA</option>
+      </select>
+    </div>
 
-  <label>BỘ PHẬN SỬ DỤNG</label>
-  <select id="maBP">
-    <option value="">-- Chọn bộ phận --</option>
-    <option value="GCBM">GCBM</option>
-    <option value="LR">LR</option>
-    <option value="KD3P">KD3P</option>
-    <option value="KD1P">KD1P</option>
-    <option value="KTSX">KTSX</option>
-  </select>
+    <div class="form-group">
+      <label>NGƯỜI THỰC HIỆN</label>
+      <input type="text" name="nguoiThucHien" required>
+    </div>
 
-  <label>MÃ MÁY</label>
-  <input type="number" id="maMay" placeholder="Nhập mã máy (VD: 001)">
+    <div class="form-group">
+      <label>MÃ MÁY</label>
+      <input type="text" name="maMay" placeholder="Nhập mã máy (VD: 001)" required>
+    </div>
 
-  <button onclick="guiDuLieu()">Gửi dữ liệu</button>
+    <div class="form-group">
+      <label>LOẠI KIỂM TRA <span class="required">*</span></label>
+      <div class="radio-group">
+        <div class="radio-item">
+          <input type="radio" id="dinhky" name="loaiKiemTra" value="Định kỳ" required>
+          <label for="dinhky" style="text-transform: none; margin:0;">Định kỳ</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="suachua" name="loaiKiemTra" value="Sửa chữa">
+          <label for="suachua" style="text-transform: none; margin:0;">Sửa chữa</label>
+        </div>
+      </div>
+    </div>
 
-  <div class="message" id="msg"></div>
+    <div class="form-group">
+      <label>NHIỆT ĐỘ CÀI ĐẶT</label>
+      <input type="text" name="nhietDoCaiDat" required>
+    </div>
+
+    <div class="form-group">
+      <label>NHIỆT ĐỘ THỰC TẾ</label>
+      <input type="text" name="nhietDoThucTe" required>
+    </div>
+
+    <div class="form-group">
+      <label>GHI CHÚ</label>
+      <input type="text" name="ghiChu">
+    </div>
+
+    <button type="submit" id="submitBtn">Gửi dữ liệu</button>
+  </form>
 </div>
 
 <script>
-const URL_API = "https://script.google.com/macros/s/AKfycbyibTfkX8T1YnGuJjhc6TGryFQp751oet0dUFJjm4mr4osdO1Ket2P6x0qu-lZjljQTZg/exec";
-
-function guiDuLieu() {
-  const maBP = document.getElementById("maBP").value;
-  const maMay = document.getElementById("maMay").value;
-  const msg = document.getElementById("msg");
-
-  // Validation
-  if (!maBP) {
-    msg.innerText = "Vui lòng chọn bộ phận";
-    msg.style.color = "red";
-    return;
+  function handleFormSubmit(formObject) {
+    event.preventDefault();
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('submitBtn').innerHTML = "Đang gửi...";
+    
+    google.script.run
+      .withSuccessHandler(function(msg) {
+        alert(msg);
+        document.getElementById("tempForm").reset();
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').innerHTML = "Gửi dữ liệu";
+      })
+      .processForm(formObject);
   }
-
-  if (!maMay || maMay < 0 || maMay > 500) {
-    msg.innerText = "Nhiệt độ không hợp lệ (0-500°C)";
-    msg.style.color = "red";
-    return;
-  }
-
-  const data = {
-    maBP: maBP,
-    maMay: maMay
-  };
-
-  fetch(URL_API, {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-  .then(res => res.json())
-  .then(() => {
-    msg.innerText = "Lưu thành công";
-    msg.style.color = "green";
-
-    document.getElementById("maMay").value = "";
-    document.getElementById("maBP").value = "";
-  })
-  .catch(() => {
-    msg.innerText = "Lỗi gửi dữ liệu";
-    msg.style.color = "red";
-  });
-}
 </script>
 
 </body>
 </html>
-
