@@ -1,15 +1,6 @@
 // Thay link này bằng URL Web App từ Google Apps Script của bạn
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxt8ZOfL-Eg2pKHkC7kDTyn1UlOfnQOHZLOZt5hHEqpg15WWhwTWtHd740_mf-ahJuwZw/exec';
-const mauTong = parseInt(data.mauKiemTra);
-const mauDat = parseInt(data.mauDat);
-const mauLoi = parseInt(data.mauKhongDat || 0);
 
-if (mauDat + mauLoi !== mauTong) {
-    alert("Lỗi: Tổng số mẫu Đạt và Không đạt phải bằng Số lượng mẫu kiểm tra!");
-    btn.disabled = false;
-    btn.innerText = "GỬI DỮ LIỆU";
-    return;
-}
 //------------------------------------XỬ LÝ CÁC NÚT NHẤN--------------------------------
 async function sendDataToGoogleSheet(data) {
     const response = await fetch(SCRIPT_URL, {
@@ -33,4 +24,13 @@ function goToMenu() {
     window.location.href = 'index.html'; 
 }
 //------------------------------------XỬ LÝ SỐ LIỆU CÁC Ô ĐẠT, KHÔNG ĐẠT, NGUYÊN NHÂN--------------------------------
+const mauTong = parseInt(data.mauKiemTra);
+const mauDat = parseInt(data.mauDat);
+const mauLoi = parseInt(data.mauKhongDat || 0);
 
+if (mauDat + mauLoi !== mauTong) {
+    alert("Lỗi: Tổng số mẫu Đạt và Không đạt phải bằng Số lượng mẫu kiểm tra!");
+    btn.disabled = false;
+    btn.innerText = "GỬI DỮ LIỆU";
+    return;
+}
