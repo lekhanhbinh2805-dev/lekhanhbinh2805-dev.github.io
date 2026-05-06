@@ -61,7 +61,10 @@
         /* Radio buttons */
         .radio-group { display: flex; gap: 20px; padding: 10px 0; }
         .radio-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
-
+        .radio-item input:checked + span {
+            color: #007bff;
+            font-weight: bold;
+        }
         /* Khu vực nút bấm */
         .button-stack {
             display: flex;
