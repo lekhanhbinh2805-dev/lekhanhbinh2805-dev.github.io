@@ -1,4 +1,4 @@
-// Thay link này bằng URL Web App từ Google Apps Script của bạn
+// Link URL Web App từ Google Apps Script
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxt8ZOfL-Eg2pKHkC7kDTyn1UlOfnQOHZLOZt5hHEqpg15WWhwTWtHd740_mf-ahJuwZw/exec';
 
 async function sendDataToGoogleSheet(data) {
