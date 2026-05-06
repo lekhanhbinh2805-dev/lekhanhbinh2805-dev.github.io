@@ -24,13 +24,4 @@ function goToMenu() {
     window.location.href = 'index.html'; 
 }
 //------------------------------------XỬ LÝ SỐ LIỆU CÁC Ô ĐẠT, KHÔNG ĐẠT, NGUYÊN NHÂN--------------------------------
-const mauTong = parseInt(data.mauKiemTra);
-const mauDat = parseInt(data.mauDat);
-const mauLoi = parseInt(data.mauKhongDat || 0);
 
-if (mauDat + mauLoi !== mauTong) {
-    alert("Lỗi: Tổng số mẫu Đạt và Không đạt phải bằng Số lượng mẫu kiểm tra!");
-    btn.disabled = false;
-    btn.innerText = "GỬI DỮ LIỆU";
-    return;
-}
