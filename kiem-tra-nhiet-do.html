@@ -201,37 +201,8 @@
         </div>
     </form>
 </div>
-
+<!-- GỌI SCRIPT XỬ LÝ -->
 <script src="script.js"></script>
 
-    <script>
-        const form = document.getElementById('tempForm');
-        const btn = document.getElementById('submitBtn');
-
-        // Xử lý sự kiện gửi form
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            btn.disabled = true;
-            btn.innerText = "Đang gửi...";
-
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-
-            try {
-                // Gọi hàm từ file script.js đã tách
-                await sendDataToGoogleSheet(data);
-                
-                alert("Gửi dữ liệu thành công!");
-                form.reset();
-            } catch (error) {
-                console.error('Lỗi:', error);
-                alert("Lỗi kết nối! Vui lòng thử lại.");
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "GỬI DỮ LIỆU";
-            }
-        });
-    </script>
 </body>
 </html>
