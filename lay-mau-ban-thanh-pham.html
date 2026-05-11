@@ -62,12 +62,34 @@
         input:focus { border-color: #5bb1f9; box-shadow: 0 0 5px rgba(91,177,249,0.3); }
 
         /* Radio buttons */
-        .radio-group { display: flex; gap: 20px; padding: 10px 0; }
-        .radio-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
-        .radio-item input:checked + span {
-            color: #007bff;
-            font-weight: bold;
-        }
+        /* Container bao quanh các hàng */
+		.radio-container {
+		    display: flex;
+		    flex-direction: column;
+		    gap: 10px; /* Khoảng cách giữa 2 hàng */
+		    padding: 10px 0;
+		}
+		
+		/* Định dạng từng hàng */
+		.radio-row {
+		    display: flex;
+		    justify-content: flex-start;
+		}
+		
+		/* Định dạng từng mục radio để chia đều 50% chiều rộng */
+		.radio-item {
+		    flex: 1; /* Mỗi tên chiếm 1 nửa hàng */
+		    display: flex;
+		    align-items: center;
+		    gap: 8px;
+		    cursor: pointer;
+		    font-size: 15px;
+		}
+
+		/* Làm cho điểm nhấn radio dễ nhìn hơn */
+		.radio-item input[type="radio"] {
+		    transform: scale(1.2);
+		}
         /* Khu vực nút bấm */
         .button-stack {
             display: flex;
@@ -139,21 +161,31 @@
     
     <form id="tempForm">
         <!-- Người kiểm tra -->
+        <form id="tempForm">
+        <!-- Người thực hiện chia 2 hàng -->
         <div class="form-group">
             <label>NGƯỜI THỰC HIỆN</label>
-            <div class="radio-group">
-                <label class="radio-item">
-                    <input type="radio" name="nguoiThucHien2" value="Công Bình" required> Công Bình
-                </label>
-                <label class="radio-item">
-                    <input type="radio" name="nguoiThucHien2" value="Ngọc Dung"> Ngọc Dung
-                </label>
-                <label class="radio-item">
-                    <input type="radio" name="nguoiThucHien2" value="Viết Tùy"> Viết Tùy
-                </label>
-                <label class="radio-item">
-                    <input type="radio" name="nguoiThucHien2" value="Khánh Bình"> Khánh Bình
-                </label>
+            <div class="radio-container">
+                <div class="radio-row">
+                    <label class="radio-item">
+                        <input type="radio" name="nguoiThucHien2" value="Công Bình" required> 
+                        <span>Công Bình</span>
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="nguoiThucHien2" value="Ngọc Dung"> 
+                        <span>Ngọc Dung</span>
+                    </label>
+                </div>
+                <div class="radio-row">
+                    <label class="radio-item">
+                        <input type="radio" name="nguoiThucHien2" value="Viết Tùy"> 
+                        <span>Viết Tùy</span>
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="nguoiThucHien2" value="Khánh Bình"> 
+                        <span>Khánh Bình</span>
+                    </label>
+                </div>
             </div>
         </div>
         <!-- Chủng loại -->
