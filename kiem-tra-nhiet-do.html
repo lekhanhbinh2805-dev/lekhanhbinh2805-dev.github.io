@@ -7,7 +7,7 @@
     <style>
         /* Giao diện tổng thể */
         body { 
-            background-color: #e74c3c; 
+            background-color: #f4f7f6; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             display: flex; 
             justify-content: center; 
@@ -20,8 +20,8 @@
             padding: 30px; 
             border-radius: 15px; 
             width: 100%; 
-            max-width: 450px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+            max-width: 600px; /* Tăng nhẹ chiều rộng để nhãn nằm ngang thoải mái */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
         }
 
         h2 { 
@@ -29,56 +29,54 @@
             text-transform: uppercase; 
             font-weight: bold; 
             margin-bottom: 25px; 
-            color: #333; 
-            font-size: 22px;
+            color: #2c3e50; 
+            font-size: 20px;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 10px;
         }
 
-        /* Group các ô nhập liệu */
+        /* Group các ô nhập liệu - Căn ngang */
         .form-group { 
             display: flex;
-            align-items: center; /* Căn giữa theo chiều dọc */
+            align-items: center;
             margin-bottom: 15px; 
         }
 
         label { 
-            flex: 0 0 140px; /* Label rộng cố định 140px, không co giãn */
-            font-weight: bold; 
-            margin-bottom: 0; /* Bỏ margin bottom vì đã nằm ngang */
+            flex: 0 0 160px; /* Độ rộng cố định cho nhãn */
+            font-weight: 600; 
             font-size: 13px; 
             color: #444; 
-            text-align: left;
-            padding-right: 10px;
+            padding-right: 15px;
         }
 
-        /* Để các ô nhập liệu chiếm phần diện tích còn lại */
         input[type="text"], 
         input[type="number"], 
-        select,
+        select { 
+            flex: 1; /* Chiếm không gian còn lại */
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 6px; 
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input:focus { border-color: #007bff; box-shadow: 0 0 5px rgba(0,123,255,0.2); }
+
+        /* Radio buttons */
         .radio-group { 
-            flex: 1; /* Chiếm hết không gian còn lại */
-            width: auto; /* Ghi đè width 100% cũ */
+            flex: 1;
+            display: flex; 
+            gap: 20px; 
         }
-        
-        /* Đảm bảo radio group không bị dính sát vào label */
-        .radio-group {
-            display: flex;
-            gap: 20px;
-            padding: 0;
-        }
-        
-        /* Media query cho điện thoại: Nếu màn hình quá nhỏ thì quay lại nằm dọc */
-        @media (max-width: 400px) {
-            .form-group {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            label {
-                flex: none;
-                margin-bottom: 5px;
-            }
-            input, select, .radio-group {
-                width: 100%;
-            }
+        .radio-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 5px; 
+            cursor: pointer; 
+            font-size: 14px;
+            flex: none; /* Reset lại flex cho label con trong radio */
         }
 
         /* Khu vực nút bấm */
@@ -86,7 +84,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .row-buttons {
@@ -96,10 +94,10 @@
 
         button {
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-size: 14px;
             display: flex;
             align-items: center;
@@ -108,38 +106,48 @@
 
         .btn-submit {
             width: 100%;
-            background-color: #007bff;
+            background-color: #27ae60;
             color: white;
             padding: 15px;
             font-size: 16px;
         }
 
-        .btn-submit:hover { background-color: #0056b3; transform: translateY(-1px); }
+        .btn-submit:hover { background-color: #219150; }
 
         .btn-reset {
             flex: 1;
-            background-color: #dc3545;
+            background-color: #e74c3c;
             color: white;
             padding: 12px;
         }
-
-        .btn-reset:hover { background-color: #a71d2a; }
 
         .btn-back {
             flex: 1;
-            background-color: #6c757d;
+            background-color: #95a5a6;
             color: white;
             padding: 12px;
         }
-
-        .btn-back:hover { background-color: #545b62; }
 
         button:disabled {
             background-color: #ccc !important;
             cursor: not-allowed;
-            transform: none !important;
         }
 
+        /* Responsive: Dưới 480px sẽ tự động nhảy thành hàng dọc */
+        @media (max-width: 480px) {
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            label {
+                flex: none;
+                margin-bottom: 5px;
+                padding-right: 0;
+            }
+            input, select, .radio-group {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
