@@ -44,22 +44,26 @@ form.addEventListener('submit', async (e) => {
         form.reset();
     } catch (error) {
         console.error('Lỗi:', error);
-        alert("❌ Lỗi kết nối! Vui lòng kiểm tra Internet.");
+        alert("❌ Lỗi kết nối! Vui lòng kiểm tra lại.");
     } finally {
         btnSubmit.disabled = false;
         btnSubmit.innerText = "GỬI DỮ LIỆU";
     }
 });
 
-// 3. Hàm bổ trợ
+// 3. Hàm Xóa dữ liệu
 function resetForm() {
-    if(confirm("Xóa toàn bộ nội dung đã nhập?")) form.reset();
+    if (confirm("Bạn có chắc chắn muốn xóa toàn bộ nội dung đã nhập?")) {
+        form.reset();
+    }
 }
 
+// 4. Hàm Quay về Menu
 function goToMenu() {
-    window.location.href = 'index.html'; 
+    // Thay đổi link này tới trang chủ của bạn
+    window.location.href = "index.html"; 
 }
-// 4. Danh sách người thực hiện mặc định theo bộ phận
+// 5. Danh sách người thực hiện mặc định theo bộ phận
 const danhSachMacDinh = {
     "GCBM": "Thanh Tuấn",
     "LR": "Thanh Thủy",
@@ -71,7 +75,7 @@ const danhSachMacDinh = {
 const selectBoPhan = document.querySelector('select[name="boPhan"]');
 const inputNguoiThucHien = document.querySelector('input[name="nguoiThucHien"]');
 
-// 5. Lắng nghe sự kiện thay đổi lựa chọn bộ phận
+// 6. Lắng nghe sự kiện thay đổi lựa chọn bộ phận
 selectBoPhan.addEventListener('change', function() {
     const boPhanDaChon = this.value;
     
