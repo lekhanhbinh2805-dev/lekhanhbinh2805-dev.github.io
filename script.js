@@ -19,42 +19,6 @@ function resetForm() {
 }
 
 function goToMenu() {
+    // Chuyển hướng về trang chủ hoặc menu
     window.location.href = 'index.html'; 
 }
-
-// Xử lý sự kiện khi gửi Form
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('tempForm');
-    const btn = document.getElementById('submitBtn');
-    const inputThucTe = document.getElementById('nhietDoThucTe');
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Kiểm tra giới hạn 340 - 380
-        const tempValue = parseFloat(inputThucTe.value);
-        if (tempValue < 340 || tempValue > 380) {
-            alert("CẢNH BÁO: Nhiệt độ thực tế phải nằm trong khoảng từ 340°C đến 380°C!");
-            inputThucTe.focus();
-            return;
-        }
-        
-        btn.disabled = true;
-        btn.innerText = "Đang gửi...";
-
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        try {
-            await sendDataToGoogleSheet(data);
-            alert("Gửi dữ liệu thành công!");
-            form.reset();
-        } catch (error) {
-            console.error('Lỗi:', error);
-            alert("Lỗi kết nối! Vui lòng thử lại.");
-        } finally {
-            btn.disabled = false;
-            btn.innerText = "GỬI DỮ LIỆU";
-        }
-    });
-});
