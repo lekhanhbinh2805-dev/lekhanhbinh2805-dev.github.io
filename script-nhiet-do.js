@@ -59,3 +59,26 @@ function resetForm() {
 function goToMenu() {
     window.location.href = 'index.html'; 
 }
+// 4. Danh sách người thực hiện mặc định theo bộ phận
+const danhSachMacDinh = {
+    "GCBM": "Thanh Tuấn",
+    "LR": "Thanh Thủy",
+    "KĐ3P": "Đắc Sơn",
+    "KĐ1P": "Đức Phong",
+    "KTSX": "Tấn Mẫn"
+};
+
+const selectBoPhan = document.querySelector('select[name="boPhan"]');
+const inputNguoiThucHien = document.querySelector('input[name="nguoiThucHien"]');
+
+// 5. Lắng nghe sự kiện thay đổi lựa chọn bộ phận
+selectBoPhan.addEventListener('change', function() {
+    const boPhanDaChon = this.value;
+    
+    // Nếu có tên trong danh sách mặc định thì điền vào
+    if (danhSachMacDinh[boPhanDaChon]) {
+        inputNguoiThucHien.value = danhSachMacDinh[boPhanDaChon];
+    } else {
+        inputNguoiThucHien.value = ""; // Xóa trống nếu chọn "-- Chọn bộ phận --"
+    }
+});
