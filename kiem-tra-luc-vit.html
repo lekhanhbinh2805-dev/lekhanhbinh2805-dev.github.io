@@ -151,7 +151,7 @@
         <!-- Mã máy -->
         <div class="form-group">
             <label>MÃ TUA VÍT MÁY</label>
-            <input type="text" name="maTuaVit" placeholder="VD: 001, 002..." required>
+            <input type="text" name="maTuaVit" inputmode="numeric" placeholder="VD: 001, 002..." required>
         </div>
 
         <!-- Loại kiểm tra -->
@@ -179,19 +179,26 @@
         <!-- Lực vít theo HDCV -->
         <div class="form-group">
             <label>LỰC VÍT THEO HDCV (kgf.cm)</label>
-            <input type="text" name="lucVitYC" placeholder="VD: 8-10, 17-19" required>
+            <input type="text" 
+                   name="lucVitYC" 
+                   id="lucVitYC"
+                   placeholder="VD: 8-10 hoặc 17.5-19" 
+                   pattern="^[0-9]+(\.[0-9]+)?-[0-9]+(\.[0-9]+)?$"
+                   title="Vui lòng nhập đúng định dạng: Số Min-Số Max (Ví dụ: 8-10)"
+                   required>
+            <small id="syntaxHint" style="color: #666; font-size: 11px;">Định dạng bắt buộc: Min-Max</small>
         </div>
 
         <!-- Lực vít đo được -->
         <div class="form-group">
             <label>LỰC VÍT ĐO ĐƯỢC (kgf.cm)</label>
-            <input type="number" step="any" name="lucVitDD" placeholder="Lực vít trên máy đo" required>
+            <input type="number" step="any" min="0" name="lucVitDD" inputmode="numeric" placeholder="Lực vít trên máy đo" required>
         </div>
         
         <!-- Mức lực trên tua vít máy -->
         <div class="form-group">
             <label>MỨC LỰC TRÊN TUA VÍT MÁY</label>
-            <input type="number" step="any" name="mucLuc" placeholder="Mức lực trên thân máy" required>
+            <input type="number" step="any" min="0" name="mucLuc" inputmode="numeric" placeholder="Mức lực trên thân máy" required>
         </div>
         
         <!-- Ghi chú -->
