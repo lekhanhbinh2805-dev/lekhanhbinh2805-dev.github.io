@@ -34,33 +34,52 @@
         }
 
         /* Group các ô nhập liệu */
-        .form-group { margin-bottom: 15px; }
+        .form-group { 
+            display: flex;
+            align-items: center; /* Căn giữa theo chiều dọc */
+            margin-bottom: 15px; 
+        }
 
         label { 
-            display: block; 
+            flex: 0 0 140px; /* Label rộng cố định 140px, không co giãn */
             font-weight: bold; 
-            margin-bottom: 5px; 
+            margin-bottom: 0; /* Bỏ margin bottom vì đã nằm ngang */
             font-size: 13px; 
             color: #444; 
+            text-align: left;
+            padding-right: 10px;
         }
 
+        /* Để các ô nhập liệu chiếm phần diện tích còn lại */
         input[type="text"], 
         input[type="number"], 
-        select { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            font-size: 14px;
-            outline: none;
+        select,
+        .radio-group { 
+            flex: 1; /* Chiếm hết không gian còn lại */
+            width: auto; /* Ghi đè width 100% cũ */
         }
-
-        input:focus { border-color: #5bb1f9; box-shadow: 0 0 5px rgba(91,177,249,0.3); }
-
-        /* Radio buttons */
-        .radio-group { display: flex; gap: 20px; padding: 10px 0; }
-        .radio-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        
+        /* Đảm bảo radio group không bị dính sát vào label */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            padding: 0;
+        }
+        
+        /* Media query cho điện thoại: Nếu màn hình quá nhỏ thì quay lại nằm dọc */
+        @media (max-width: 400px) {
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            label {
+                flex: none;
+                margin-bottom: 5px;
+            }
+            input, select, .radio-group {
+                width: 100%;
+            }
+        }
 
         /* Khu vực nút bấm */
         .button-stack {
