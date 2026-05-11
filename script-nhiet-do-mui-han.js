@@ -21,15 +21,6 @@ async function sendDataToGoogleSheet(data) {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const caiDat = parseInt(form.nhietDoCaiDat.value);
-    const thucTe = parseInt(form.nhietDoThucTe.value);
-
-    // Logic kiểm tra: Ví dụ không cho phép lệch quá 20 độ
-    if (Math.abs(caiDat - thucTe) > 20) {
-        const confirmTiepTuc = confirm("⚠️ Nhiệt độ thực tế lệch quá lớn (>20°C). Bạn vẫn muốn gửi?");
-        if (!confirmTiepTuc) return;
-    }
-
     // Trạng thái chờ
     btnSubmit.disabled = true;
     btnSubmit.innerText = "⏳ Đang gửi dữ liệu...";
