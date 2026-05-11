@@ -5,7 +5,6 @@ const btnSubmit = document.getElementById('submitBtn');
 
 // 1. Hàm gửi dữ liệu
 async function sendDataToGoogleSheet(data) {
-    // Thêm thời gian thực tế từ máy người dùng
     data.timestamp = new Date().toLocaleString("vi-VN");
     
     await fetch(SCRIPT_URL, {
@@ -21,12 +20,23 @@ async function sendDataToGoogleSheet(data) {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    // Lấy dữ liệu từ form
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Chuyển giá trị nhiệt độ thực tế sang số để kiểm tra
+    const thucTe = parseFloat(data.nhietDoThucTe);
+
+    // MỚI: Kiểm tra nhiệt độ thực tế nằm trong khoảng [340, 380]
+    if (isNaN(thucTe) || thucTe < 340 || thucTe > 380) {
+        alert("⚠️ Nhiệt độ thực tế không hợp lệ! (Phải từ 340°C đến 380°C)");
+        form.nhietDoThucTe.focus(); // Đưa con trỏ vào ô nhập lỗi
+        return; // Dừng không gửi dữ liệu
+    }
+
     // Trạng thái chờ
     btnSubmit.disabled = true;
     btnSubmit.innerText = "⏳ Đang gửi dữ liệu...";
-
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
 
     try {
         await sendDataToGoogleSheet(data);
