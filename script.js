@@ -83,17 +83,11 @@ if (form) {
             const dat = parseInt(data.mauDat) || 0;
             const loi = parseInt(data.mauKhongDat) || 0;
             if (tong !== (dat + loi)) {
-                // Sử dụng dấu huyền ` và cú pháp ${} để chèn biến
-                alert(`❌ Số liệu không khớp!
-                    ----------------------------------
-                    • Tổng kiểm tra: ${tong}
-                    • Đạt: ${dat}
-                    • Không đạt: ${loi}
-                    
-                    Tổng (Đạt + Không đạt) đang là ${dat + loi}, không bằng ${tong}. 
-                    Vui lòng kiểm tra lại!`);
-                return;
-            }
+        // Sử dụng dấu huyền ` và cú pháp ${} để chèn biến
+        alert(`❌ Số liệu không khớp!
+Tổng (Đạt + Không đạt) đang là ${dat + loi}, không bằng Số lượng lấy mẫu ${tong}.`);
+        return;
+    }
         }
 
         // --- TIẾN HÀNH GỬI ---
