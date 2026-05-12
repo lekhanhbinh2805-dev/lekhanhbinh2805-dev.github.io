@@ -77,13 +77,13 @@ if (form) {
             }
         }
 
-        // B. Kiểm tra khớp số lượng mẫu (Chỉ chạy nếu có đủ 3 ô)
+        // B. Kiểm tra khớp số lượng mẫu
         if (data.mauKiemTra && data.mauDat) {
             const tong = parseInt(data.mauKiemTra) || 0;
             const dat = parseInt(data.mauDat) || 0;
             const loi = parseInt(data.mauKhongDat) || 0;
             if (tong !== (dat + loi)) {
-                alert(`❌ Số lượng không khớp! (${tong} != ${dat} + ${loi})`);
+                alert("❌ Mẫu đạt ${dat} + Mẫu không đạt ${loi}) phải bằng Mẫu kiểm tra (${tong}");
                 return;
             }
         }
