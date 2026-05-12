@@ -78,7 +78,7 @@ if (form) {
         }
 
         // B. Kiểm tra khớp số lượng mẫu (Chỉ chạy nếu có đủ 3 ô)
-        if (data.mauKiemTra && data.mauDat && data.mauKhongDat) {
+        if (data.mauKiemTra && data.mauDat) {
             const tong = parseInt(data.mauKiemTra) || 0;
             const dat = parseInt(data.mauDat) || 0;
             const loi = parseInt(data.mauKhongDat) || 0;
