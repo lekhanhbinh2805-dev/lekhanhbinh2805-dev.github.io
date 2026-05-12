@@ -1,5 +1,5 @@
 // 1. Cấu hình chung
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz58w1zA8qCHofxViNR3uDlyQXLsNxBgKtZu52N84HCRd8JHRWMsLgR0zhFrzydWuhkag/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwsTISnfFAECWEv-dCLOqOOrbVJTNY3cws_AqrRmiOYTophvmS5fZedbt46WnPImEM5zA/exec';
 
 const danhSachMacDinh = {
     "GCBM": "Thanh Tuấn",
