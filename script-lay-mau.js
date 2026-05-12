@@ -1,5 +1,5 @@
 // 1. Khai báo URL và các phần tử DOM
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxt8ZOfL-Eg2pKHkC7kDTyn1UlOfnQOHZLOZt5hHEqpg15WWhwTWtHd740_mf-ahJuwZw/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxo8UYy_RkT4Ia5EOnKLF20hSrjcQb6KFKswgDJEBM4cfkMuVDpHCRYn86WU3O9sUTk_A/exec';
 
 const form = document.getElementById('tempForm');
 const btnSubmit = document.getElementById('submitBtn');
