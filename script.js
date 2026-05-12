@@ -83,7 +83,7 @@ if (form) {
             const dat = parseInt(data.mauDat) || 0;
             const loi = parseInt(data.mauKhongDat) || 0;
             if (tong !== (dat + loi)) {
-                alert('❌ Mẫu đạt (${dat}) + Mẫu không đạt (${loi}) phải bằng Mẫu kiểm tra (${tong})');
+                alert('❌ Số lượng mẫu đạt (${dat}) + Số lượng mẫu không đạt phải bằng Số lượng mẫu kiểm tra');
                 return;
             }
         }
