@@ -3,7 +3,7 @@ const btn = document.getElementById('submitBtn');
 
 // 1. Hàm gửi dữ liệu (Giả định cấu trúc script.js)
 async function sendDataToGoogleSheet(data) {
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxt8ZOfL-Eg2pKHkC7kDTyn1UlOfnQOHZLOZt5hHEqpg15WWhwTWtHd740_mf-ahJuwZw/exec"; 
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxo8UYy_RkT4Ia5EOnKLF20hSrjcQb6KFKswgDJEBM4cfkMuVDpHCRYn86WU3O9sUTk_A/exec"; 
     
     const response = await fetch(SCRIPT_URL, {
         method: 'POST',
