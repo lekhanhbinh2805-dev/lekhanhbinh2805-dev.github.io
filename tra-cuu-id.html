@@ -32,7 +32,7 @@
     <h2>TRA CỨU ID SẢN XUẤT</h2>
     <div class="form-group">
         <label>SỐ ID CẦN TRA CỨU</label>
-        <input type="number" id="idInput" placeholder="Nhập ID cần tra cứu...">
+        <input type="number" id="idInput" placeholder="Nhập ID cần tra cứu" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);" autofocus>
     </div>
     
     <div class="button-stack">
