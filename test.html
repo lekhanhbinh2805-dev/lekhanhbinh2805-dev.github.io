@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tra cứu ID Thiết Bị</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: auto; }
+        .row { margin-bottom: 10px; display: flex; }
+        label { width: 150px; font-weight: bold; }
+        input, textarea { flex: 1; padding: 5px; }
+        button { padding: 5px 15px; cursor: pointer; }
+        #status { margin: 10px 0; color: blue; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Tra cứu ID</h2>
+        <div class="row">
+            <label>Nhập ID:</label>
+            <input type="text" id="searchID" placeholder="Ví dụ: 26910000">
+            <button onclick="searchDevice()">Tìm kiếm</button>
+        </div>
+        <div id="status">✅ Sẵn sàng.</div>
+        <hr>
+        <div id="result">
+            <p><label>- Tên thiết bị:</label> <span id="txtDevice"></span></p>
+            <p><label>- Phân vùng ID:</label> <span id="txtRange"></span></p>
+            <p><label>- Version PCB:</label> <span id="txtPCB"></span></p>
+            <p><label>- Vi điều khiển:</label> <span id="txtMCU"></span></p>
+            <p><label>- SIM/AD:</label> <span id="txtSIM"></span></p>
+            <p><label>- Module RF:</label> <span id="txtRF"></span></p>
+            <p><label>- Protocol RF:</label> <span id="txtProtocol"></span></p>
+            <p><label>- Version FW:</label><br><textarea id="txtFW" readonly rows="5"></textarea></p>
+            <p><label>- Ghi chú:</label><br><textarea id="txtGhichu" readonly rows="5"></textarea></p>
+            <p><label>- Cập nhật:</label><br><textarea id="txtCapnhat" readonly rows="5"></textarea></p>
+        </div>
+    </div>
+
+    <script>
+        const CSV_URL = "https://docs.google.com/spreadsheets/d/13EO0C9go6G99hsTwSt56RDt9qnDNCZlCs6Lq1fEKDn4/export?format=csv&gid=0";
+
+        async function searchDevice() {
+            const id = document.getElementById('searchID').value.trim();
+            const status = document.getElementById('status');
+            if (!id) { status.innerText = "⚠ Vui lòng nhập ID."; return; }
+
+            status.innerText = "🌐 Đang tải dữ liệu...";
+            try {
+                const response = await fetch(CSV_URL);
+                const data = await response.text();
+                const rows = parseCSV(data);
+                
+                let found = false;
+                for (let i = 1; i < rows.length; i++) {
+                    const row = rows[i];
+                    if (row.length < 15) continue;
+                    
+                    const startID = row[2] ? row[2].trim() : "";
+                    const endID = row[3] ? row[3].trim() : "";
+
+                    if (id >= startID && id <= endID) {
+                        document.getElementById('txtDevice').innerText = row[1];
+                        document.getElementById('txtRange').innerText = startID + " - " + endID;
+                        document.getElementById('txtPCB').innerText = row[9];
+                        document.getElementById('txtMCU').innerText = row[10];
+                        document.getElementById('txtSIM').innerText = row[11];
+                        document.getElementById('txtRF').innerText = row[12];
+                        document.getElementById('txtProtocol').innerText = row[13];
+                        document.getElementById('txtFW').value = row[14];
+                        document.getElementById('txtGhichu').value = row[5];
+                        document.getElementById('txtCapnhat').value = row[8];
+                        status.innerText = "✅ Tìm thấy dữ liệu.";
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) status.innerText = "❌ Không tìm thấy dữ liệu.";
+            } catch (e) {
+                status.innerText = "❌ Lỗi tải dữ liệu.";
+            }
+        }
+
+        function parseCSV(text) {
+            // Hàm đơn giản để xử lý CSV, khớp với logic index của AHK
+            return text.split('\n').map(row => {
+                // Xử lý cơ bản dấu phẩy trong ngoặc kép nếu cần thiết
+                return row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+            });
+        }
+    </script>
+</body>
+</html>
