@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Kiểm Tra Sản Xuất</title>
-    <link rel="icon" type="image/svg+xml"
-href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='12' fill='%236c757d'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='white'%3E📋%3C/text%3E%3C/svg%3E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='12' fill='%236c757d'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='white'%3E📋%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -36,26 +38,22 @@ href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' he
             margin-top: 0;
             margin-bottom: 10px;
             font-size: 24px;
-            letter-spacing: 1px;
             text-transform: uppercase;
             border-bottom: 2px solid #6c757d;
             padding-bottom: 10px;
         }
 
-        /* Wrapper để chứa 2 nút nằm ngang */
         .menu-row {
             display: flex;
             gap: 10px;
-            align-items: stretch;
         }
 
-        /* Nút chính */
         .btn {
-            flex: 1; /* Chiếm phần lớn chiều ngang */
+            flex: 1;
             display: flex;
             align-items: center;
             padding: 16px 15px;
-            font-size: 18px;
+            font-size: 206/15/2026 4:15:50 PMpx;
             font-weight: 600;
             cursor: pointer;
             border: none;
@@ -66,13 +64,12 @@ href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' he
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Nút thống kê nhỏ */
         .btn-stats {
-            width: 55px; /* Chiều rộng cố định cho nút nhỏ */
+            width: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #576574; /* Màu xám trung tính cho thống kê */
+            background-color: #576574;
             color: white;
             border-radius: 12px;
             text-decoration: none;
@@ -80,81 +77,43 @@ href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' he
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .btn i {
-            margin-right: 12px;
-            font-size: 18px;
-            width: 20px;
-            text-align: center;
-        }
+        .btn i { margin-right: 12px; }
 
-        /* Màu sắc */
         .btn-temp { background-color: #e74c3c; }
         .btn-force { background-color: #3498db; }
         .btn-sample { background-color: #27ae60; }
-        .btn-id { background-color: #5555556/15/2026 4:05:01 PM; }
+        .btn-id { background-color: #555555; }
 
-        /* Hiệu ứng Hover */
         .btn:hover, .btn-stats:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn:active, .btn-stats:active {
-            transform: scale(0.95);
-        }
-
-        @media (max-width: 320px) {
-            h2 { font-size: 16px; }
-            .btn { font-size: 13px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2><i class="fas fa-clipboard-list"></i> DANH MỤC KIỂM TRA</h2>
+        <h2><i class="fas fa-clipboard-list"></i> Kiểm Tra Sản Xuất</h2>
 
-        <!-- Dòng 1 -->
         <div class="menu-row">
-            <a href="kiem-tra-nhiet-do.html" class="btn btn-temp">
-                <i class="fas fa-thermometer-half"></i> Nhiệt độ mũi hàn
-            </a>
-            <a href="https://docs.google.com/spreadsheets/d/1JYVEU4aEpCdZpdgyNUO7RPdlGCNS_23027AsKdJ7KkE/edit?gid=0#gid=0" class="btn-stats" title="Thống kê">
-                <i class="fas fa-chart-line"></i>
-            </a>
+            <a href="kiem-tra-nhiet-do.html" class="btn btn-temp"><i class="fas fa-thermometer-half"></i> Kiểm tra nhiệt độ mũi hàn</a>
+            <a href="https://docs.google.com/spreadsheets/d/1JYVEU4aEpCdZpdgyNUO7RPdlGCNS_23027AsKdJ7KkE/edit" target="_blank" class="btn-stats" title="Thống kê"><i class="fas fa-chart-line"></i></a>
         </div>
 
-        <!-- Dòng 2 -->
         <div class="menu-row">
-            <a href="kiem-tra-luc-vit.html" class="btn btn-force">
-                <i class="fas fa-tools"></i> Lực vít máy
-            </a>
-            <a href="https://docs.google.com/spreadsheets/d/1JYVEU4aEpCdZpdgyNUO7RPdlGCNS_23027AsKdJ7KkE/edit?gid=1255979350#gid=1255979350" class="btn-stats" title="Thống kê">
-                <i class="fas fa-chart-bar"></i>
-            </a>
+            <a href="kiem-tra-luc-vit.html" class="btn btn-force"><i class="fas fa-tools"></i> Kiểm tra lực vít máy</a>
+            <a href="https://docs.google.com/spreadsheets/d/1JYVEU4aEpCdZpdgyNUO7RPdlGCNS_23027AsKdJ7KkE/edit" target="_blank" class="btn-stats" title="Thống kê"><i class="fas fa-chart-bar"></i></a>
         </div>
 
-        <!-- Dòng 3 -->
         <div class="menu-row">
-            <a href="lay-mau-ban-thanh-pham.html" class="btn btn-sample">
-                <i class="fas fa-box-open"></i> Lấy mẫu bán thành phẩm
-            </a>
-            <a href="https://docs.google.com/spreadsheets/d/1JYVEU4aEpCdZpdgyNUO7RPdlGCNS_23027AsKdJ7KkE/edit?gid=299993860#gid=299993860" class="btn-stats" title="Thống kê">
-                <i class="fas fa-pie-chart"></i>
-            </a>
+            <a href="lay-mau-ban-thanh-pham.html" class="btn btn-sample"><i class="fas fa-box-open"></i> Lấy mẫu bán thành phẩm</a>
+            <a href="https://docs.google.com/spreadsheets/d/1JYVEU4aEpCdZpdgyNUO7RPdlGCNS_23027AsKdJ7KkE/edit" target="_blank" class="btn-stats" title="Thống kê"><i class="fas fa-chart-pie"></i></a>
         </div>
-        <!-- Dòng 4 -->
+        
         <div class="menu-row">
-            <a href="tra-cuu-id.html" class="btn btn-id">
-                <i class="fas fa-box-open"></i> Tra cứu ID
-            </a>
-            <a href="" class="btn-stats" title="Thống kê">
-                <i class="fas fa-pie-chart"></i>
-            </a>
+            <a href="tra-cuu-id.html" class="btn btn-id"><i class="fas fa-search"></i> Tra cứu ID sản xuất</a>
+            <div class="btn-stats" style="background-color: transparent; cursor: default;"></div>
         </div>
     </div>
-
 </body>
 </html>
-
