@@ -78,6 +78,8 @@
             const data = await response.json();
 
             if (data.status === "success") {
+            	// Tự động bôi đen số đã nhập sau khi tra cứu thành công
+                idInput.select();
                 document.getElementById('tenSanPham').innerText = data.tenSanPham;
                 document.getElementById('phanvungID').innerText = data.idStart + " - " + data.idEnd;
                 document.getElementById('verFW').innerText = data.verFW;
@@ -104,6 +106,8 @@
     function resetForm() {
         document.getElementById('idInput').value = "";
         document.getElementById('infoArea').style.display = "none";
+        // Trỏ chuột vào ô nhập ID sau khi xóa
+        idInput.focus();
     }
 
     function goToMenu() {
