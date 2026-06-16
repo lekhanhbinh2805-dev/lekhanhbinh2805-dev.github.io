@@ -6,6 +6,7 @@
     <title>Tra cứu ID sản xuất</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Ctext x='60' y='110' font-size='130' text-anchor='middle'%3E🔍%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/html5-qrcode"></script>
     <style>
         body { background-color: #555555; }
         h2 { border-bottom-color: #555555; }
@@ -21,17 +22,24 @@
             display: none;
         }
         #infoArea p { margin: 10px 0; }
+        
+        #reader { width: 100%; margin-top: 10px; display: none; }
+        .input-wrapper { display: flex; gap: 5px; }
+        #btnScan { background-color: #32CD32; color: white; padding: 0 10px; border-radius: 8px; border: none; }
     </style>
 </head>
 <body>
 
 <div class="form-container">
     <h2>TRA CỨU ID SẢN XUẤT</h2>
-    <div class="form-group">
-        <label>SỐ ID CẦN TRA CỨU</label>
-        <input type="number" id="idInput" placeholder="Nhập ID cần tra cứu" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);" autofocus>
-    </div>
-    
+	<div class="form-group">
+	    <label>SỐ ID CẦN TRA CỨU</label>
+	    <div class="input-wrapper">
+	        <input type="number" id="idInput" placeholder="Nhập ID hoặc nhấn quét" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);" autofocus>
+	        <button type="button" id="btnScan" onclick="startScanner()">📸</button>
+	    </div>
+	    <div id="reader"></div>
+	</div>    
     <div class="button-stack">
         <button type="button" id="btnSearch" onclick="traCuu()" class="btn-submit">TRA CỨU</button>
         <div class="row-buttons">
@@ -102,7 +110,32 @@
             btn.disabled = false;
         }
     }
-
+	let html5QrcodeScanner;
+	
+	function startScanner() {
+	    const reader = document.getElementById('reader');
+	    reader.style.display = "block";
+	    
+	    html5QrcodeScanner = new Html5Qrcode("reader");
+	    html5QrcodeScanner.start(
+	        { facingMode: "environment" }, // Sử dụng camera sau
+	        { fps: 10, qrbox: 250 },
+	        (decodedText) => {
+	            document.getElementById('idInput').value = decodedText;
+	            stopScanner();
+	            traCuu(); // Tự động tra cứu sau khi quét xong
+	        },
+	        (errorMessage) => { /* Bỏ qua lỗi quét liên tục */ }
+	    ).catch(err => alert("Không thể truy cập camera: " + err));
+	}
+	
+	function stopScanner() {
+	    if (html5QrcodeScanner) {
+	        html5QrcodeScanner.stop().then(() => {
+	            document.getElementById('reader').style.display = "none";
+	        });
+	    }
+	}
     function resetForm() {
         document.getElementById('idInput').value = "";
         document.getElementById('infoArea').style.display = "none";
