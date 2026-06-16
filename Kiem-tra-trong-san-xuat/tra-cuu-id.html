@@ -43,6 +43,7 @@
     <div id="infoArea">
         <p><strong>- Sản phẩm:</strong> <span id="tenSanPham"></span></p>
         <p><strong>- Phân vùng ID:</strong> <span id="phanvungID"></span></p>
+        <p><strong>- Số lượng ID được phân vùng:</strong> <span id="slID"></span></p>
         <p><strong>- Version FW:</strong> <span id="verFW"></span></p>
         <p><strong>- Version PCB:</strong> <span id="verPCB"></span></p>       
         <p><strong>- Vi điều khiển:</strong> <span id="vdk"></span></p>
@@ -55,7 +56,7 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkQD3tFWCJMEyk-fFufMrihtBrGrU9Yg1hU7di7EtK6LDjXtrXDCZDhRXGmgBeqvVDDw/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5puO6-fnanAyO_Up93tDtcTlQAkRmpMiNa3SnbV-qBNLe3teVgADfNxp2s687RCdIXQ/exec";
 
     // Hỗ trợ nhấn phím Enter để tra cứu
     document.getElementById("idInput").addEventListener("keypress", function(event) {
@@ -80,6 +81,7 @@
                 idInput.select();
                 document.getElementById('tenSanPham').innerText = data.tenSanPham;
                 document.getElementById('phanvungID').innerText = data.idStart + " - " + data.idEnd;
+                document.getElementById('slID').innerText = data.slID;
                 document.getElementById('verFW').innerText = data.verFW;
                 document.getElementById('verPCB').innerText = data.verPCB;
                 document.getElementById('vdk').innerText = data.vdk;
@@ -114,4 +116,3 @@
 </script>
 </body>
 </html>
-
