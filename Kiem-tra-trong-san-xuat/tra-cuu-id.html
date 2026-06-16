@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra cứu ID sản xuất</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Ctext x='60' y='110' font-size='130' text-anchor='middle'%3E🔍%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #555555; }
+        h2 { border-bottom-color: #555555; }
+        .button-stack {
+		    margin-top: -15px;
+        }
+        #infoArea {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px solid #eee;
+            display: none;
+        }
+        #infoArea p { margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>TRA CỨU ID SẢN XUẤT</h2>
+    <div class="form-group">
+        <label>SỐ ID CẦN TRA CỨU</label>
+        <input type="number" id="idInput" placeholder="Nhập ID cần tra cứu" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);" autofocus>
+    </div>
+    
+    <div class="button-stack">
+        <button type="button" id="btnSearch" onclick="traCuu()" class="btn-submit">TRA CỨU</button>
+        <div class="row-buttons">
+            <button type="button" class="btn-reset" onclick="resetForm()">XÓA NHẬP LẠI</button>
+            <button type="button" class="btn-back" onclick="goToMenu()">QUAY VỀ MENU</button>
+        </div>
+    </div>                               
+    
+    <div id="infoArea">
+        <p><strong>- Sản phẩm:</strong> <span id="tenSanPham"></span></p>
+        <p><strong>- Phân vùng ID:</strong> <span id="phanvungID"></span></p>
+        <p><strong>- Version FW:</strong> <span id="verFW"></span></p>
+        <p><strong>- Version PCB:</strong> <span id="verPCB"></span></p>       
+        <p><strong>- Vi điều khiển:</strong> <span id="vdk"></span></p>
+        <p><strong>- Module Sim/AD:</strong> <span id="simad"></span></p>
+        <p><strong>- Module FW:</strong> <span id="rf"></span></p>
+        <p><strong>- Giao thức RF:</strong> <span id="giaothuc"></span></p>
+        <p><strong>- Ghi chú:</strong> <span id="ghiChu"></span></p>
+        <p><strong>- Cập nhật:</strong> <span id="capnhat"></span></p>
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkQD3tFWCJMEyk-fFufMrihtBrGrU9Yg1hU7di7EtK6LDjXtrXDCZDhRXGmgBeqvVDDw/exec";
+
+    // Hỗ trợ nhấn phím Enter để tra cứu
+    document.getElementById("idInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") traCuu();
+    });
+
+    async function traCuu() {
+        const id = document.getElementById('idInput').value;
+        const btn = document.getElementById('btnSearch');
+        
+        if (!id) { alert("Vui lòng nhập ID cần tìm !"); return; }
+
+        btn.innerText = "⏳ Đang tra cứu...";
+        btn.disabled = true;
+
+        try {
+            const response = await fetch(`${SCRIPT_URL}?id=${id}`);
+            const data = await response.json();
+
+            if (data.status === "success") {
+            	// Tự động bôi đen số đã nhập sau khi tra cứu thành công
+                idInput.select();
+                document.getElementById('tenSanPham').innerText = data.tenSanPham;
+                document.getElementById('phanvungID').innerText = data.idStart + " - " + data.idEnd;
+                document.getElementById('verFW').innerText = data.verFW;
+                document.getElementById('verPCB').innerText = data.verPCB;
+                document.getElementById('vdk').innerText = data.vdk;
+                document.getElementById('simad').innerText = data.simad;
+                document.getElementById('rf').innerText = data.rf;
+                document.getElementById('giaothuc').innerText = data.giaothuc;
+                document.getElementById('ghiChu').innerText = data.ghiChu;
+                document.getElementById('capnhat').innerText = data.capnhat;
+                document.getElementById('infoArea').style.display = "block";
+            } else {
+                alert(data.message);
+                document.getElementById('infoArea').style.display = "none";
+            }
+        } catch (error) {
+            alert("Lỗi kết nối server!");
+        } finally {
+            btn.innerText = "TRA CỨU";
+            btn.disabled = false;
+        }
+    }
+
+    function resetForm() {
+        document.getElementById('idInput').value = "";
+        document.getElementById('infoArea').style.display = "none";
+        // Trỏ chuột vào ô nhập ID sau khi xóa
+        idInput.focus();
+    }
+
+    function goToMenu() {
+        window.location.href = "index.html"; // Thay đổi nếu menu của bạn có tên khác
+    }
+</script>
+</body>
+</html>
+

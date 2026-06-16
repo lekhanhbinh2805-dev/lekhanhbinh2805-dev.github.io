@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra nhiệt độ mũi hàn</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Ctext x='60' y='110' font-size='130' text-anchor='middle'%3E🌡️%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #e74c3c; }
+        h2 { border-bottom-color: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>KIỂM TRA NHIỆT ĐỘ MŨI HÀN</h2>
+    
+    <form id="tempForm">
+        <!-- Bộ phận -->
+        <div class="form-group">
+            <label>BỘ PHẬN SỬ DỤNG</label>
+            <select name="boPhan" required>
+                <option value="">-- Chọn bộ phận --</option>
+                <option value="GCBM">GCBM</option>
+                <option value="LR">Lắp ráp</option>
+                <option value="KĐ3P">KĐ3P</option>
+                <option value="KĐ1P">KĐ1P</option>
+                <option value="KTSX">KTSX</option>
+            </select>
+        </div>
+
+        <!-- Người thực hiện -->
+        <div class="form-group">
+            <label>NGƯỜI THỰC HIỆN</label>
+            <!-- Thêm id để JS dễ truy cập và ghi chú cho người dùng -->
+            <input type="text" name="nguoiThucHien" id="nguoiThucHien" placeholder="Tên tự động điền hoặc tự nhập..." required>
+        </div>
+
+        <!-- Mã máy -->
+        <div class="form-group">
+            <label>MÃ MÁY HÀN</label>
+            <input type="number" name="maMayHan" min="0" inputmode="numeric" placeholder="VD: 001, 002..." oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" required>
+        </div>
+
+        <!-- Loại kiểm tra -->
+        <div class="form-group">
+            <label>LOẠI KIỂM TRA</label>
+            <div class="radio-group">
+                <label class="radio-item">
+                    <input type="radio" name="loaiKiemTra" value="Định kỳ" required> Định kỳ
+                </label>
+                <label class="radio-item">
+                    <input type="radio" name="loaiKiemTra" value="Sửa chữa"> Sửa chữa
+                </label>
+            </div>
+        </div>
+
+        <!-- Nhiệt độ cài đặt -->
+        <div class="form-group">
+            <label>NHIỆT ĐỘ CÀI ĐẶT (°C)</label>
+            <input type="number" name="nhietDoCaiDat" min="0" inputmode="numeric" placeholder="Số trên LCD hoặc Núm chỉnh nhiệt độ" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" required>
+        </div>
+
+        <!-- Nhiệt độ thực tế -->
+        <div class="form-group">
+            <label>NHIỆT ĐỘ THỰC TẾ (°C)</label>
+            <input type="number" name="nhietDoThucTe" inputmode="numeric" placeholder="Hiển thị trên máy đo nhiệt độ" oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3);" required>
+        </div>
+
+        <!-- Ghi chú -->
+        <div class="form-group">
+            <label>GHI CHÚ</label>
+            <input type="text" name="ghiChu" placeholder="Nếu có...">
+        </div>
+
+        <!-- Nhóm nút bấm -->
+        <div class="button-stack">
+            <!-- Nút gửi chính -->
+            <button type="submit" id="submitBtn" class="btn-submit">GỬI DỮ LIỆU</button>
+            
+            <div class="row-buttons">
+                <!-- Nút Xóa dữ liệu -->
+                <button type="button" class="btn-reset" onclick="resetForm()">XÓA NHẬP LẠI</button>
+                
+                <!-- Nút Quay về -->
+                <!-- Thay 'index.html' bằng file bạn muốn quay về -->
+                <button type="button" class="btn-back" onclick="goToMenu()">QUAY VỀ MENU</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="script.js"></script>
+
+    <script>
+        const form = document.getElementById('tempForm');
+        const btn = document.getElementById('submitBtn');
+
+        // Xử lý sự kiện gửi form
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            btn.disabled = true;
+            btn.innerText = "Đang gửi...";
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                // Gọi hàm từ file script.js đã tách
+                await sendDataToGoogleSheet(data);
+                
+                alert("Gửi dữ liệu thành công!");
+                form.reset();
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert("Lỗi kết nối! Vui lòng thử lại.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "GỬI DỮ LIỆU";
+            }
+        });
+    </script>
+</body>
+</html>

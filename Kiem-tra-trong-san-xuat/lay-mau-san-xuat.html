@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lấy mẫu bán sản xuất</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Ctext x='60' y='110' font-size='130' text-anchor='middle'%3E📦%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #27ae60; }
+        h2 { border-bottom-color: #27ae60; }
+		.radio-group {
+		    flex-direction: column;
+		    gap: 10px; /* Khoảng cách giữa 2 hàng */
+		}
+		
+		.radio-row {
+		    display: flex;
+		    justify-content: flex-start;
+		}
+			
+    /* Ẩn mặc định ô nguyên nhân lỗi */
+    .hidden {
+        display: none;
+    }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>LẤY MẪU SẢN XUẤT</h2>
+    
+    <form id="tempForm">
+        <!-- Người kiểm tra -->
+        <form id="tempForm">
+        <!-- Người thực hiện chia 2 hàng -->
+        <div class="form-group">
+            <label>NGƯỜI THỰC HIỆN</label>
+            <div class="radio-group">
+                <div class="radio-row">
+                    <label class="radio-item">
+                        <input type="radio" name="nguoiThucHien" value="Công Bình" required> 
+                        <span>Công Bình</span>
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="nguoiThucHien" value="Ngọc Dung"> 
+                        <span>Ngọc Dung</span>
+                    </label>
+                </div>
+                <div class="radio-row">
+                    <label class="radio-item">
+                        <input type="radio" name="nguoiThucHien" value="Viết Tùy"> 
+                        <span>Viết Tùy</span>
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="nguoiThucHien" value="Khánh Bình"> 
+                        <span>Khánh Bình</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Chủng loại -->
+        <div class="form-group">
+            <label>CHỦNG LOẠI SẢN PHẨM</label>
+            <select name="chungLoai" required>
+                <option value="">-- Chọn chủng loại --</option>
+                <option value="DT01P">DT01P</option>
+                <option value="DT01P60">DT01P60</option>
+                <option value="DT01P80">DT01P80</option>
+                <option value="DT01M10">DT01M10</option>
+                <option value="DT01M80">DT01M80</option>
+                <option value="DT03P">DT03P</option>
+                <option value="DT03P05">DT03P05</option>
+                <option value="DT03M05">DT03M05</option>
+                <option value="DT03M10">DT03M10</option>
+                <option value="PQM3P">PQM3P</option>
+                <option value="DCU 1P">DCU 1P</option>
+                <option value="Router">Router</option>
+                <option value="Repeater">Repeater</option>
+                <option value="RMR">RMR</option>
+                <option value="Elster-RF">Elster-RF</option>
+                <option value="Multimeter-RF">Multimeter-RF</option>
+                <option value="HHU-INCEU">HHU-INCEU</option>
+                <option value="UART SLOT 3P">UART SLOT 3P</option>
+            </select>
+        </div>
+        <!-- Công đoạn lấy mẫu -->
+        <div class="form-group">
+            <label>CÔNG ĐOẠN LẤY MẪU</label>
+            <select name="congDoan" required>
+                <option value="">-- Chọn công đoạn --</option>
+                <option value="SMT, IMT">SMT, IMT</option>
+                <option value="Hàn linh kiện">Hàn linh kiện</option>
+                <option value="Lắp ráp">Lắp ráp</option>
+                <option value="LT IDSX">LT IDSX</option>
+                <option value="Hiệu chỉnh">Hiệu chỉnh</option>
+                <option value="TNMT">TNMT</option>
+                <option value="LT IDXX">LT IDXX</option>
+                <option value="KĐ">Kiểm định</option>
+                <option value="ĐG">Đóng gói</option>
+            </select>
+        </div>
+
+        <!-- Số lượng mẫu kiểm tra -->
+        <div class="form-group">
+            <label>SỐ LƯỢNG MẪU KIỂM TRA</label>
+            <input type="number" name="mauKiemTra" min="1" inputmode="numeric" oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);" required>
+        </div>
+        
+        <!-- Số lượng mẫu Đạt -->
+        <div class="form-group">
+            <label>SỐ LƯỢNG MẪU ĐẠT</label>
+            <input type="number" name="mauDat" min="0" inputmode="numeric" oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);" required>
+        </div>
+        
+        <!-- Số lượng mẫu Không đạt -->
+        <div class="form-group">
+            <label>SỐ LƯỢNG MẪU KHÔNG ĐẠT</label>
+            <input type="number" name="mauKhongDat" min="0" inputmode="numeric" placeholder="Nếu có..."oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);">
+        </div>
+        
+        <!-- Nguyên nhân không đạt (Bọc trong div để ẩn/hiện) -->
+        <div class="form-group hidden" id="nguyenNhanWrapper">
+            <label>NGUYÊN NHÂN KHÔNG ĐẠT</label>
+            <input type="text" name="nguyenNhan" id="nguyenNhanInput" placeholder="Nhập nguyên nhân lỗi">
+        </div>
+
+        <!-- Nhóm nút bấm -->
+        <div class="button-stack">
+            <!-- Nút gửi chính -->
+            <button type="submit" id="submitBtn" class="btn-submit">GỬI DỮ LIỆU</button>
+            
+            <div class="row-buttons">
+                <!-- Nút Xóa dữ liệu -->
+                <button type="button" class="btn-reset" onclick="resetForm()">XÓA NHẬP LẠI</button>
+                
+                <!-- Nút Quay về -->
+                <!-- Thay 'index.html' bằng file bạn muốn quay về -->
+                <button type="button" class="btn-back" onclick="goToMenu()">QUAY VỀ MENU</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="script.js"></script>
+
+    <script>
+        const form = document.getElementById('tempForm');
+        const btn = document.getElementById('submitBtn');
+
+        // Xử lý sự kiện gửi form
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            btn.disabled = true;
+            btn.innerText = "Đang gửi...";
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                // Gọi hàm từ file script.js đã tách
+                await sendDataToGoogleSheet(data);
+                
+                alert("Gửi dữ liệu thành công!");
+                form.reset();
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert("Lỗi kết nối! Vui lòng thử lại.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "GỬI DỮ LIỆU";
+            }
+        });
+    </script>
+</body>
+</html>

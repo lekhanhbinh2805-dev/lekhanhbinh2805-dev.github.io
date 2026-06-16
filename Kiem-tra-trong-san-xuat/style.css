@@ -1,0 +1,125 @@
+/* Giao diện tổng thể */
+body {    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 0;
+}
+/* Giao diện vùng hiện thông tin các thành phần */		
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%; 
+    max-width: 400px; 
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+}
+/* Giao diện đề mục */
+h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 23px;
+    text-transform: uppercase;
+    border-bottom: 2px solid;
+    padding-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+/* Group các ô nhập liệu */
+.form-group { margin-bottom: 10px; }
+label { 
+    display: block; 
+    font-weight: bold; 
+    margin-bottom: 5px; 
+    font-size: 16px; 
+    color: #444; 
+}
+
+input[type="text"], input[type="number"], select { 
+    width: 100%; 
+    padding: 12px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    box-sizing: border-box; 
+    font-size: 14px;
+    outline: none;
+}
+input:focus { border-color: #5bb1f9; box-shadow: 0 0 5px rgba(91,177,249,0.3); }
+
+/* Radio buttons */
+.radio-group {
+    display: flex;
+    gap: 5px;
+    padding: 5px 0;
+}
+.radio-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+/* Khu vực nút bấm */
+.button-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.row-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+}
+
+.btn-reset {
+    flex: 1;
+    background-color: #dc3545;
+    color: white;
+    padding: 12px;
+}
+
+.btn-back {
+    flex: 1;
+    background-color: #6c757d;
+    color: white;
+    padding: 12px;
+}
+
+.btn-reset:hover, .btn-back:hover, .btn-submit:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+button:disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed;
+    transform: none !important;
+}
