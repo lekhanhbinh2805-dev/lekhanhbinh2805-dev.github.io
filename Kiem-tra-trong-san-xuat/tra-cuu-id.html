@@ -85,8 +85,7 @@
             const data = await response.json();
 
             if (data.status === "success") {
-            	// Tự động bôi đen số đã nhập sau khi tra cứu thành công
-                idInput.select();
+
                 document.getElementById('tenSanPham').innerText = data.tenSanPham;
                 document.getElementById('phanvungID').innerText = data.idStart + " - " + data.idEnd;
                 document.getElementById('slID').innerText = data.slID;
