@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra lực vít máy</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Ctext x='60' y='110' font-size='130' text-anchor='middle'%3E🔧%3C/text%3E%3C/svg%3E">
+    <style>
+        /* Giao diện tổng thể */
+        body { 
+            background-color: #3498db; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            padding: 10px; 
+            margin: 0;
+        }
+
+        .form-container { 
+            background-color: white; 
+            padding: 15px; 
+            border-radius: 15px; 
+            width: 100%; 
+            max-width: 400px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+        }
+
+        h2 { 
+            text-align: center; 
+            text-transform: uppercase; 
+            font-weight: bold; 
+            margin-bottom: 25px; 
+            color: #333; 
+            font-size: 24px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        /* Group các ô nhập liệu */
+        .form-group { margin-bottom: 15px; }
+
+        label { 
+            display: block; 
+            font-weight: bold; 
+            margin-bottom: 5px; 
+            font-size: 16px; 
+            color: #444; 
+        }
+
+        input[type="text"], 
+        input[type="number"], 
+        select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus { border-color: #5bb1f9; box-shadow: 0 0 5px rgba(91,177,249,0.3); }
+
+        /* Radio buttons */
+        .radio-group { display: flex; gap: 20px; padding: 10px 0; }
+        .radio-item { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+
+        /* Khu vực nút bấm */
+        .button-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .row-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        .btn-submit:hover { background-color: #0056b3; transform: translateY(-1px); }
+
+        .btn-reset {
+            flex: 1;
+            background-color: #dc3545;
+            color: white;
+            padding: 12px;
+        }
+
+        .btn-reset:hover { background-color: #a71d2a; }
+
+        .btn-back {
+            flex: 1;
+            background-color: #6c757d;
+            color: white;
+            padding: 12px;
+        }
+
+        .btn-back:hover { background-color: #545b62; }
+
+        button:disabled {
+            background-color: #ccc !important;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>KIỂM TRA LỰC VÍT MÁY</h2>
+    
+    <form id="tempForm">
+        <!-- Bộ phận -->
+        <div class="form-group">
+            <label>BỘ PHẬN SỬ DỤNG</label>
+            <select name="boPhan" required>
+                <option value="">-- Chọn bộ phận --</option>
+                <option value="GCBM">GCBM</option>
+                <option value="LR">Lắp ráp</option>
+                <option value="KĐ3P">KĐ3P</option>
+                <option value="KĐ1P">KĐ1P</option>
+                <option value="KTSX">KTSX</option>
+            </select>
+        </div>
+
+        <!-- Người thực hiện -->
+        <div class="form-group">
+            <label>NGƯỜI THỰC HIỆN</label>
+            <!-- Thêm id để JS dễ truy cập và ghi chú cho người dùng -->
+            <input type="text" name="nguoiThucHien" id="nguoiThucHien" placeholder="Tên tự động điền hoặc tự nhập..." required>
+        </div>
+
+        <!-- Mã máy -->
+        <div class="form-group">
+            <label>MÃ TUA VÍT MÁY</label>
+            <input type="number" name="maTuaVit" inputmode="numeric" placeholder="VD: 001, 002..." required>
+        </div>
+
+        <!-- Loại kiểm tra -->
+        <div class="form-group">
+            <label>LOẠI KIỂM TRA</label>
+            <div class="radio-group">
+                <label class="radio-item">
+                    <input type="radio" name="loaiKiemTra" value="Định kỳ" required> Định kỳ
+                </label>
+                <label class="radio-item">
+                    <input type="radio" name="loaiKiemTra" value="Sửa chữa"> Sửa chữa
+                </label>
+                <label class="radio-item">
+                    <input type="radio" name="loaiKiemTra" value="Thay đổi vị trí"> Thay đổi vị trí
+                </label>
+            </div>
+        </div>
+
+        <!-- Vị trí công việc -->
+        <div class="form-group">
+            <label>VỊ TRÍ CÔNG VIỆC</label>
+            <input type="text" name="viTriCV" required>
+        </div>
+
+        <!-- Lực vít theo HDCV -->
+        <div class="form-group">
+            <label>LỰC VÍT THEO HDCV (kgf.cm)</label>
+            <input type="text" 
+                name="lucVitYC" 
+                id="lucVitYC"
+                inputmode="numeric"
+                placeholder="Định dạng bắt buộc: Min-Max (VD: 8-10 hoặc 17.5-19)" 
+                pattern="^[0-9]+(\.[0-9]+)?-[0-9]+(\.[0-9]+)?$"
+                title="Vui lòng nhập đúng định dạng: Số Min-Số Max (Ví dụ: 8-10)"
+                required>
+        </div>
+
+        <!-- Lực vít đo được -->
+        <div class="form-group">
+            <label>LỰC VÍT ĐO ĐƯỢC (kgf.cm)</label>
+            <input type="number" step="any" min="0" name="lucVitDD" inputmode="numeric" placeholder="Lực vít trên máy đo" required>
+        </div>
+        
+        <!-- Mức lực trên tua vít máy -->
+        <div class="form-group">
+            <label>MỨC LỰC TRÊN TUA VÍT MÁY</label>
+            <input type="number" step="any" min="0" name="mucLuc" inputmode="numeric" placeholder="Mức lực trên thân máy" required>
+        </div>
+        
+        <!-- Ghi chú -->
+        <div class="form-group">
+            <label>GHI CHÚ</label>
+            <input type="text" name="ghiChu" placeholder="Nếu có...">
+        </div>
+
+        <!-- Nhóm nút bấm -->
+        <div class="button-stack">
+            <!-- Nút gửi chính -->
+            <button type="submit" id="submitBtn" class="btn-submit">GỬI DỮ LIỆU</button>
+            
+            <div class="row-buttons">
+                <!-- Nút Xóa dữ liệu -->
+                <button type="button" class="btn-reset" onclick="resetForm()">XÓA NHẬP LẠI</button>
+                
+                <!-- Nút Quay về -->
+                <button type="button" class="btn-back" onclick="goToMenu()">QUAY VỀ MENU</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="script.js"></script>
+
+    <script>
+        const form = document.getElementById('tempForm');
+        const btn = document.getElementById('submitBtn');
+
+        // Xử lý sự kiện gửi form
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            btn.disabled = true;
+            btn.innerText = "Đang gửi...";
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                // Gọi hàm từ file script.js đã tách
+                await sendDataToGoogleSheet(data);
+                
+                alert("Gửi dữ liệu thành công!");
+                form.reset();
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert("Lỗi kết nối! Vui lòng thử lại.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "GỬI DỮ LIỆU";
+            }
+        });
+</script>
+
+</body>
+</html>
